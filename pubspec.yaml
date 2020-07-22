@@ -25,7 +25,9 @@ dependencies:
     sdk: flutter
   provider: ^4.3.1
   device_preview: ^0.4.5
-
+  dartz: ^0.9.1
+  mockito: ^4.1.1
+  equatable: ^1.2.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
