@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:gymsmith_web/core/usecase/no_params.dart';
 import 'package:gymsmith_web/features/deals_of_the_day_list/domain/entities/items.dart';
 import 'package:gymsmith_web/features/deals_of_the_day_list/domain/repositories/items_repository.dart';
 import 'package:gymsmith_web/features/deals_of_the_day_list/domain/usecases/get_deals_of_the_day_usecase.dart';
@@ -26,7 +27,7 @@ void main(){
         when(repository.getItems()).thenAnswer((_) async => Right(items));
 
         //act
-        final result = await getDealsOfTheDayUsecase.execute();
+        final result = await getDealsOfTheDayUsecase(NoParams());
 
         //assert
         expect(result, Right(items));
