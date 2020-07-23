@@ -29,5 +29,29 @@
     }
   </script>
   <script src="main.dart.js" type="application/javascript"></script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-analytics.js"></script>
+
+  <script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyA9DutQXWq4JAx50JYl4tNAvXppNRG4_Wk",
+    authDomain: "gymsmith-test.firebaseapp.com",
+    databaseURL: "https://gymsmith-test.firebaseio.com",
+    projectId: "gymsmith-test",
+    storageBucket: "gymsmith-test.appspot.com",
+    messagingSenderId: "1082200017092",
+    appId: "1:1082200017092:web:83671875a70aea3a076191",
+    measurementId: "G-DFJQ7TQJRJ"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+
 </body>
 </html>

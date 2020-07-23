@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 
-class Params extends Equatable{
+class WithParams extends Equatable{
   final Object param;
 
-  Params({this.param});
+  WithParams({this.param});
 
   @override
   // TODO: implement props
