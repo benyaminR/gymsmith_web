@@ -28,6 +28,7 @@ dependencies:
   dartz: ^0.9.1
   mockito: ^4.1.1
   equatable: ^1.2.2
+  data_connection_checker: ^0.3.4
   #firebase
   firebase_core: ^0.4.0+9
   firebase_auth: ^0.14.0+5

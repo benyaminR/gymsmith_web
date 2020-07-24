@@ -4,7 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gymsmith_web/core/error/exception.dart';
 import 'package:gymsmith_web/core/error/failure.dart';
-import 'package:gymsmith_web/core/network_info.dart';
+import 'file:///D:/Projects/gymsmith_web/lib/core/networking/network_info.dart';
 import 'package:gymsmith_web/features/deals_of_the_day_list/data/datasources/items_remote_datasource.dart';
 import 'package:gymsmith_web/features/deals_of_the_day_list/data/models/items_model.dart';
 import 'package:gymsmith_web/features/deals_of_the_day_list/data/respositories/items_repository_implementation.dart';
