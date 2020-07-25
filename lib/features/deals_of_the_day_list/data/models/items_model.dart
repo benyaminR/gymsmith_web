@@ -25,5 +25,4 @@ class ItemsModel extends Items implements Equatable{
      });
      return ItemsModel(items: items);
    }
-
 }

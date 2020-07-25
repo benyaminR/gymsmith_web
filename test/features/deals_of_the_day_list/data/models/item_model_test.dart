@@ -25,7 +25,6 @@ void main(){
     });
   });
 
-
   ItemsModel model = ItemsModel();
 
   test('is this model a subclass of Item entity ', () async{

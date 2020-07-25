@@ -9,13 +9,12 @@ abstract class ItemsRemoteDataSource {
 }
 
 class ItemsRemoteDataSourceImpl implements ItemsRemoteDataSource{
-  final CollectionReference collectionReference;
+  final Firestore firestore;
 
-  ItemsRemoteDataSourceImpl({@required this.collectionReference});
+  ItemsRemoteDataSourceImpl({@required this.firestore});
 
   @override
-  Future<ItemsModel> getItems() {
-    collectionReference.snapshots();
-    return null;
+  Future<ItemsModel> getItems() async{
+    return Future.value(ItemsModel.fromSnapshot( await firestore.collection(Products_Path).getDocuments()));
   }
 }
