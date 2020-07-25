@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gymsmith_web/Colors/color_swatches.dart';
+import 'package:gymsmith_web/injection_container.dart';
 
-void main() {
+void main() async{
+  await init();
   runApp(MyApp());
 }
 
