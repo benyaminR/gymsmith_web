@@ -9,14 +9,13 @@ abstract class ItemsRemoteDataSource {
 }
 
 class ItemsRemoteDataSourceImpl implements ItemsRemoteDataSource{
-  final Firestore firestore;
+  final CollectionReference collectionReference;
 
-  ItemsRemoteDataSourceImpl({@required this.firestore});
+  ItemsRemoteDataSourceImpl({@required this.collectionReference});
 
   @override
   Future<ItemsModel> getItems() {
-    firestore.collection(Products_Path).getDocuments();
+    collectionReference.snapshots();
     return null;
   }
-
 }

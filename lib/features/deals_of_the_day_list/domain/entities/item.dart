@@ -4,12 +4,12 @@ import 'package:flutter/cupertino.dart';
 class Item extends Equatable{
   final String description;
   final String name;
-  final List<String> images;
-  final double price;
+  final List<dynamic> images;
+  final String price;
   final bool isNew;
   final bool isAvailable;
-  final List<String> colors;
-  final List<String> sizes;
+  final List<dynamic> colors;
+  final List<dynamic> sizes;
 
   Item({
     @required this.description,
