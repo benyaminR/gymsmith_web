@@ -1,13 +1,10 @@
 
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_firestore_mocks/cloud_firestore_mocks.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gymsmith_web/database_paths.dart';
+import 'file:///D:/Projects/gymsmith_web/lib/utils/database_paths.dart';
 import 'package:gymsmith_web/features/deals_of_the_day_list/data/datasources/items_remote_datasource.dart';
 import 'package:gymsmith_web/features/deals_of_the_day_list/data/models/items_model.dart';
-import 'package:mockito/mockito.dart';
 
 void main(){
   ItemsRemoteDataSourceImpl dataSourceImpl;

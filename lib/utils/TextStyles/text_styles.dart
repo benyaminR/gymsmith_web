@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gymsmith_web/Colors/color_swatches.dart';
+import 'package:gymsmith_web/utils/Colors/color_swatches.dart';
 
 //Black
 const TextStyle Black_Title_30PT = TextStyle(

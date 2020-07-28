@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gymsmith_web/Colors/color_swatches.dart';
+import 'package:gymsmith_web/home_page.dart';
 import 'package:gymsmith_web/injection_container.dart';
+import 'package:gymsmith_web/utils/Colors/color_swatches.dart';
 
 void main() async{
   await init();
@@ -14,11 +15,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Black,
         backgroundColor: Grey_Background,
         accentColor: Orange,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-      )
+      ),
+      initialRoute: '/',
+      routes: {'/': (BuildContext buildContext)=>HomePage(),},
     );
   }
 }

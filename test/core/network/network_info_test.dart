@@ -1,7 +1,6 @@
-
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gymsmith_web/core/networking/network_info.dart';
+import 'package:gymsmith_web/core/networking/network_info_impl.dart';
 import 'package:mockito/mockito.dart';
 
 class MockDataConnectionChecker extends Mock implements DataConnectionChecker{}
