@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gymsmith_web/home_page.dart';
+import 'package:gymsmith_web/injection.dart';
 import 'package:gymsmith_web/injection_container.dart';
 import 'package:gymsmith_web/utils/Colors/color_swatches.dart';
+import 'package:injectable/injectable.dart';
 
-void main() async{
-  await init();
+void main(){
+  configureInjection();
   runApp(MyApp());
 }
 

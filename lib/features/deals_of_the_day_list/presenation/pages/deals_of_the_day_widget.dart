@@ -8,23 +8,19 @@ class DealsOfTheDayWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => sl<DealsOfTheDayBloc>(),
-      child: Container(
-        height: 490,
-        child: BlocBuilder<DealsOfTheDayBloc,DealsOfTheDayState>(
-          builder: (context,state){
-            print(state);
-            if(state is Empty){
-              return Text("empty");
-            }else if(state is Loading){
-              return Text("Loading");
-            }else if(state is Loaded){
-              return Text("Loaded");
-            }else if(state is Error){
-              return Text(state.msg);
-            }
-            return Text('Unknown state!');
-          },
-        ),
+      child: BlocBuilder<DealsOfTheDayBloc,DealsOfTheDayState>(
+        builder: (context,state){
+          if(state is Empty){
+            return Text("empty");
+          }else if(state is Loading){
+            return Text("Loading");
+          }else if(state is Loaded){
+            return Text("Loaded");
+          }else if(state is Error){
+            return Text(state.msg);
+          }
+          return Text('Unknown state!');
+        },
       ),
     );
   }

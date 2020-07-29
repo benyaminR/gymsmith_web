@@ -1,22 +1,14 @@
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:data_connection_checker/data_connection_checker.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
+import 'package:injectable/injectable.dart';
 
-import 'core/networking/network_info.dart';
-import 'core/networking/network_info_impl.dart';
-import 'features/deals_of_the_day_list/data/datasources/items_remote_datasource.dart';
-import 'features/deals_of_the_day_list/data/respositories/items_repository_implementation.dart';
-import 'features/deals_of_the_day_list/domain/repositories/items_repository.dart';
-import 'features/deals_of_the_day_list/domain/usecases/get_deals_of_the_day_usecase.dart';
-import 'features/deals_of_the_day_list/presenation/deals_of_the_day/deals_of_the_day_bloc.dart';
 
 final sl = GetIt.instance;
 
-Future<void> init() async{
-  //Features
+//@injectableInit
+//void configureDependencies() => $initGetIt(getIt);
 
+  //Features
+/*
   //deals of the day
   sl.registerFactory(() => DealsOfTheDayBloc(Empty(),getDealsOfTheDayUsecase: sl()));
 
@@ -37,7 +29,7 @@ Future<void> init() async{
   sl.registerLazySingleton<DataConnectionChecker>(() => DataConnectionChecker());
 
   //firestore
-  /*
+
   final FirebaseApp app = await FirebaseApp.configure(
     name: 'test',
     options: const FirebaseOptions(
@@ -50,7 +42,7 @@ Future<void> init() async{
   );
 
   final Firestore firestore = Firestore(app: app);
-  */
-  sl.registerLazySingleton(() => Firestore.instance);
 
-}
+  sl.registerLazySingleton(() => firestore);
+  */
+
