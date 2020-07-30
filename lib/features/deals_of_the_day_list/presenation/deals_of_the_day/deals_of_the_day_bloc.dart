@@ -7,6 +7,7 @@ import 'package:gymsmith_web/features/deals_of_the_day_list/domain/entities/item
 import 'package:gymsmith_web/features/deals_of_the_day_list/domain/usecases/get_deals_of_the_day_usecase.dart';
 import 'package:meta/meta.dart';
 
+
 part 'deals_of_the_day_event.dart';
 
 part 'deals_of_the_day_state.dart';
@@ -20,13 +21,11 @@ class DealsOfTheDayBloc extends Bloc<DealsOfTheDayEvent, DealsOfTheDayState> {
 
   DealsOfTheDayBloc(DealsOfTheDayState initialState, {@required this.getDealsOfTheDayUsecase}) : super(initialState);
 
-
-
-  @override
-  DealsOfTheDayState get initialState => Empty();
+  DealsOfTheDayState get initialState => InitialDealsOfTheDayState();
 
   @override
   Stream<DealsOfTheDayState> mapEventToState(DealsOfTheDayEvent event) async* {
+    print(event);
     if(event is GetDealsOfTheDay){
       yield Loading();
       final failureOrItems = await getDealsOfTheDayUsecase(NoParams());

@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
-import 'file:///D:/Projects/gymsmith_web/lib/utils/database_paths.dart';
 import 'package:gymsmith_web/features/deals_of_the_day_list/data/models/items_model.dart';
+import 'package:gymsmith_web/utils/database_paths.dart';
 
 abstract class ItemsRemoteDataSource {
-  ///Gets a ItemsModel from the firebase cloud
   Future<ItemsModel> getItems();
 }
 

@@ -1,17 +1,24 @@
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:get_it/get_it.dart';
-import 'package:injectable/injectable.dart';
+import 'core/networking/network_info.dart';
+import 'core/networking/network_info_impl.dart';
+import 'features/deals_of_the_day_list/data/datasources/items_remote_datasource.dart';
+import 'features/deals_of_the_day_list/data/respositories/items_repository_implementation.dart';
+import 'features/deals_of_the_day_list/domain/repositories/items_repository.dart';
+import 'features/deals_of_the_day_list/domain/usecases/get_deals_of_the_day_usecase.dart';
+import 'features/deals_of_the_day_list/presenation/deals_of_the_day/deals_of_the_day_bloc.dart';
+
 
 
 final sl = GetIt.instance;
 
-//@injectableInit
-//void configureDependencies() => $initGetIt(getIt);
-
+Future<void> init() async{
   //Features
-/*
-  //deals of the day
-  sl.registerFactory(() => DealsOfTheDayBloc(Empty(),getDealsOfTheDayUsecase: sl()));
 
+  //deals of the day
+  sl.registerFactory(() => DealsOfTheDayBloc(InitialDealsOfTheDayState(),getDealsOfTheDayUsecase: sl()));
   //domain
   sl.registerLazySingleton(() => GetDealsOfTheDayUsecase(repository: sl()));
 
@@ -23,13 +30,13 @@ final sl = GetIt.instance;
   sl.registerLazySingleton<ItemsRemoteDataSource>(() =>ItemsRemoteDataSourceImpl(firestore: sl()));
 
   // Core
-  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(dataConnectionChecker: sl()));
+  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(connectivity: sl()));
 
   //Externals
-  sl.registerLazySingleton<DataConnectionChecker>(() => DataConnectionChecker());
+  sl.registerLazySingleton<Connectivity>(() => Connectivity());
 
   //firestore
-
+  /*
   final FirebaseApp app = await FirebaseApp.configure(
     name: 'test',
     options: const FirebaseOptions(
@@ -42,7 +49,6 @@ final sl = GetIt.instance;
   );
 
   final Firestore firestore = Firestore(app: app);
-
-  sl.registerLazySingleton(() => firestore);
   */
-
+  sl.registerLazySingleton(() => Firestore.instance);
+}

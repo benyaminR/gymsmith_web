@@ -17,12 +17,12 @@ void main() {
   setUp((){
 
     getDealsOfTheDayUsecase = MockGetDealsOfTheDayUseCase();
-    bloc = DealsOfTheDayBloc(Empty(),getDealsOfTheDayUsecase: getDealsOfTheDayUsecase);
+    bloc = DealsOfTheDayBloc(InitialDealsOfTheDayState(),getDealsOfTheDayUsecase: getDealsOfTheDayUsecase);
   });
 
   group('should changes states', (){
     test('should return Empty state', () async{
-      expect(bloc.initialState, isA<Empty>());
+      expect(bloc.initialState, isA<InitialDealsOfTheDayState>());
     });
 
     test('should change state when loading', () async{
