@@ -18,10 +18,12 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         backgroundColor: Grey_Background,
+        primaryColor: Colors.black,
         accentColor: Orange,
         scaffoldBackgroundColor: Color(0xFFF8F8F8),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {'/': (BuildContext buildContext)=>HomePage(),},
     );
