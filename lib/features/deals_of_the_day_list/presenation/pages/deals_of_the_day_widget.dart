@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gymsmith_web/TextStyles/text_styles.dart';
+import 'package:gymsmith_web/custom_icons/custom_icons_icons.dart';
 import 'package:gymsmith_web/features/deals_of_the_day_list/presenation/deals_of_the_day/deals_of_the_day_bloc.dart';
 import 'package:gymsmith_web/injection_container.dart';
 import 'package:gymsmith_web/title_bar.dart';
@@ -82,9 +83,12 @@ class DealsOfTheDayWidget extends StatelessWidget {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
-                                    child: IconButton(
-                                      onPressed: ()=> print(item.name),
-                                      icon: Icon(Icons.add_shopping_cart),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(top: 16),
+                                      child: GestureDetector(
+                                        onTap: ()=> print(item.name),
+                                        child: Icon(CustomIcons.cart,size: 40,),
+                                      ),
                                     ),
                                   )
                                 ],
