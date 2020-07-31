@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:gymsmith_web/core/utils/TextStyles/text_styles.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:supercharged/supercharged.dart';
@@ -38,8 +39,20 @@ class _HomePageSlideShowIntroState extends State<HomePageSlideShowIntro> {
               alignment: Alignment.center,
               child: Text(
                 'Finde deine passende Rüstung.',
-                style: roboto28BlackWhite,
-              )),
+                style: GoogleFonts.roboto(textStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 46,
+                  fontWeight: FontWeight.bold,
+                  shadows: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 6,
+                      spreadRadius: 20
+                    )
+                  ]
+                )),
+              )
+          ),
         ],
       ),
     ),
@@ -55,8 +68,20 @@ class _HomePageSlideShowIntroState extends State<HomePageSlideShowIntro> {
               alignment: Alignment.center,
               child: Text(
                 'Finde deine passende Rüstung.',
-                style: roboto28BlackWhite,
-              )),
+                style: GoogleFonts.roboto(textStyle: TextStyle(
+                    color: Colors.white,
+                    fontSize: 46,
+                    fontWeight: FontWeight.bold,
+                    shadows: [
+                      BoxShadow(
+                          color: Colors.black26,
+                          blurRadius: 6,
+                          spreadRadius: 20
+                      )
+                    ]
+                )),
+              )
+          ),
         ],
       ),
     ),
@@ -72,8 +97,20 @@ class _HomePageSlideShowIntroState extends State<HomePageSlideShowIntro> {
               alignment: Alignment.center,
               child: Text(
                 'Finde deine passende Rüstung.',
-                style: roboto28BlackWhite,
-              )),
+                style: GoogleFonts.roboto(textStyle: TextStyle(
+                    color: Colors.white,
+                    fontSize: 46,
+                    fontWeight: FontWeight.bold,
+                    shadows: [
+                      BoxShadow(
+                          color: Colors.black26,
+                          blurRadius: 6,
+                          spreadRadius: 20
+                      )
+                    ]
+                )),
+              )
+          ),
         ],
       ),
     ),

@@ -79,7 +79,7 @@ class DealsOfTheDayWidget extends StatelessWidget {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.fromLTRB(0,0,16,8),
-                                    child: Text(item.price,style: roboto16GreyUnderline,),
+                                    child: Text(item.price+' €',style: roboto16GreyUnderline,),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),

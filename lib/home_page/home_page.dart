@@ -33,9 +33,18 @@ class HomePage extends StatelessWidget {
               SizedBox(height: 45.5,),
 
               Container(
+                decoration: BoxDecoration(
+                    color: Colors.grey[600],
+                    boxShadow: [
+                      BoxShadow(
+                          offset: Offset(0,1),
+                          blurRadius: 2,
+                          color: Colors.black26
+                      )
+                    ]
+                ),
                 height: 0.5,
                 width: 834,
-                color: Colors.grey[600],
               ),
 
               SizedBox(height: 21.5,),
@@ -45,9 +54,18 @@ class HomePage extends StatelessWidget {
               SizedBox(height: 29.5,),
 
               Container(
+                decoration: BoxDecoration(
+                    color: Colors.grey[600],
+                    boxShadow: [
+                    BoxShadow(
+                       offset: Offset(0,1),
+                      blurRadius: 2,
+                      color: Colors.black26
+                    )
+                  ]
+                ),
                 height: 0.5,
                 width: 834,
-                color: Colors.grey[600],
               ),
 
               SizedBox(height:235.5,),
