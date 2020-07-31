@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gymsmith_web/core/common_widgets/bottom_nav_bar.dart';
 import 'package:gymsmith_web/home_page/home_page_slide_show_intro.dart';
 import 'package:gymsmith_web/core/common_widgets/app_bar.dart';
 import 'package:gymsmith_web/features/deals_of_the_day_list/presenation/pages/deals_of_the_day_widget.dart';
@@ -16,6 +17,7 @@ class HomePage extends StatelessWidget {
         child: Container(
           height: 3979,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
                 height: 38,
@@ -48,8 +50,9 @@ class HomePage extends StatelessWidget {
                 color: Colors.grey[600],
               ),
 
-              SizedBox(height:235.5,)
+              SizedBox(height:235.5,),
 
+              BottomNavBar(),
             ],
           ),
         ),
