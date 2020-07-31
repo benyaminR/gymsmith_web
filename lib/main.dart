@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gymsmith_web/core/debugging/data_pumper.dart';
-import 'package:gymsmith_web/home_page.dart';
+import 'core/utils/Colors/color_swatches.dart';
 import 'package:gymsmith_web/injection_container.dart';
-import 'package:gymsmith_web/utils/Colors/color_swatches.dart';
+import 'home_page/home_page.dart';
 
 void main() async{
   await init();

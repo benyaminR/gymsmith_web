@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gymsmith_web/TextStyles/text_styles.dart';
+import 'package:gymsmith_web/core/utils/TextStyles/text_styles.dart';
 
 class TitleBar extends StatelessWidget {
   final String title;

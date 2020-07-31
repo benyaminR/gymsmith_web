@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gymsmith_web/TextStyles/text_styles.dart';
-import 'package:gymsmith_web/custom_icons/custom_icons_icons.dart';
+import 'package:gymsmith_web/core/custom_icons/custom_icons_icons.dart';
+import 'package:gymsmith_web/core/utils/TextStyles/text_styles.dart';
+
+
+
 
 class CommonAppBar extends StatelessWidget {
   @override
@@ -70,15 +73,15 @@ child: Text("GYMSMITH",style: roboto28BlackWhite,)
 ),
 actions: [
 IconButton(
-icon: Icon(CustomIcons.search,color: Colors.white,),
+icon: Icon(CustomIcons.search,color: core.Colors.white,),
 onPressed: ()=> print('search'),
 ),
 IconButton(
-icon: Icon(CustomIcons.user,color: Colors.white),
+icon: Icon(CustomIcons.user,color: core.Colors.white),
 onPressed: ()=> print('user'),
 ),
 IconButton(
-icon: Icon(CustomIcons.cart,color: Colors.white,size: 40,),
+icon: Icon(CustomIcons.cart,color: core.Colors.white,size: 40,),
 onPressed: ()=> print('cart'),
 )
 ],*/

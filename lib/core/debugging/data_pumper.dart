@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:gymsmith_web/features/deals_of_the_day_list/domain/entities/item.dart';
+import 'package:gymsmith_web/core/utils/database_paths.dart';
 import 'package:gymsmith_web/injection_container.dart';
-import 'package:gymsmith_web/utils/database_paths.dart';
 
 final size = 10;
 

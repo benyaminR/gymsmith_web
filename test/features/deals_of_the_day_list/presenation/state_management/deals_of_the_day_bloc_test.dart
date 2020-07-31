@@ -60,11 +60,12 @@ void main() {
     //act
     final expected = [
       Loading(),
-      Loaded()
+      Loaded(items: items)
     ];
 
     //act
     bloc.add(GetDealsOfTheDay());
+
     //assert
     expectLater(bloc, emitsInOrder(expected));
 

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gymsmith_web/TextStyles/text_styles.dart';
-import 'package:gymsmith_web/custom_icons/custom_icons_icons.dart';
+import 'package:gymsmith_web/core/common_widgets/title_bar.dart';
+import 'package:gymsmith_web/core/custom_icons/custom_icons_icons.dart';
+import 'package:gymsmith_web/core/utils/TextStyles/text_styles.dart';
 import 'package:gymsmith_web/features/deals_of_the_day_list/presenation/deals_of_the_day/deals_of_the_day_bloc.dart';
 import 'package:gymsmith_web/injection_container.dart';
-import 'package:gymsmith_web/title_bar.dart';
 
 class DealsOfTheDayWidget extends StatelessWidget {
   @override

@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:get_it/get_it.dart';
+import 'package:gymsmith_web/core/slideshow/slide_show/slide_show_bloc.dart';
 import 'core/networking/network_info.dart';
 import 'core/networking/network_info_impl.dart';
 import 'features/deals_of_the_day_list/data/datasources/items_remote_datasource.dart';
@@ -28,6 +29,7 @@ Future<void> init() async{
   ));
 
   sl.registerLazySingleton<ItemsRemoteDataSource>(() =>ItemsRemoteDataSourceImpl(firestore: sl()));
+
 
   // Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(connectivity: sl()));
