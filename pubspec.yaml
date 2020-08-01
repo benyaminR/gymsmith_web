@@ -25,6 +25,7 @@ dependencies:
     sdk: flutter
   provider: ^4.3.1
   device_preview: ^0.4.7
+  responsive_builder: ^0.2.0+2
   dartz: ^0.9.1
   mockito: ^4.1.1
   equatable: ^1.2.3

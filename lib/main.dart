@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:gymsmith_web/core/debugging/data_pumper.dart';
 import 'core/utils/Colors/color_swatches.dart';
