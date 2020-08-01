@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gymsmith_web/core/utils/TextStyles/text_styles.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:supercharged/supercharged.dart';
 
@@ -44,59 +45,61 @@ class _HomePageBottomSlideShowState extends State<HomePageBottomSlideShow> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: 1857,
-          height: 1724,
-          alignment: Alignment.center,
-          child: Stack(
-            children:[ CustomAnimation<double>(
-              control: CustomAnimationControl.PLAY_FROM_START,
-              tween: 0.0.tweenTo(1.0),
-              builder: (context, child, value) => Stack(
-                children: [
-                  Opacity(
-                    opacity: value,
-                    child: current,
+    return ResponsiveBuilder(
+      builder: (context, sizingInformation) => Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              width: sizingInformation.screenSize.width,
+              alignment: Alignment.center,
+              child: Column(
+                children:[
+                  MirrorAnimation(
+                    duration: Duration(seconds: 3),
+                    curve: Curves.linear,
+                    tween: 0.tweenTo(topText.length),
+                    builder: (context, child, value) => Text(topText.substring(0,value),style: GoogleFonts.roboto(textStyle: TextStyle(
+                        color: Colors.grey[600],
+                        fontSize: sizingInformation.isDesktop ? 46 : 26
+                    )),),
                   ),
-                  Opacity(
-                    opacity: (value-1).abs(),
-                    child: previous,
-                  )
+                  CustomAnimation<double>(
+                  control: CustomAnimationControl.PLAY_FROM_START,
+                  tween: 0.0.tweenTo(1.0),
+                  builder: (context, child, value) => Stack(
+                    children: [
+                      Opacity(
+                        opacity: value,
+                        child: current,
+                      ),
+                      Opacity(
+                        opacity: (value-1).abs(),
+                        child: previous,
+                      )
+                    ],
+                  ),
+                  duration: widget.duration,
+                )
                 ],
               ),
-              duration: widget.duration,
             ),
-            Align(
-              alignment: Alignment.lerp(Alignment.topLeft, Alignment.bottomLeft, 0.15),
-              child: MirrorAnimation(
-                duration: Duration(seconds: 3),
-                curve: Curves.linear,
-                tween: 0.tweenTo(topText.length),
-                builder: (context, child, value) => Text(topText.substring(0,value),style: GoogleFonts.roboto(textStyle: TextStyle(
-                    color: Colors.grey[600],
-                    fontSize: 46
-                )),),
-              ),
-            )
-            ],
           ),
-        ),
 
-        ButtonTheme(
-          height: 103,
-          minWidth: 321,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(4)
-          ),
-          child: MaterialButton(
-            child: Text('Erkunden',style: roboto28BlackWhite,),
-            onPressed: ()=> print('Erkunden'),
-            color: Colors.black,
-          ),
-        )
-      ],
+          ButtonTheme(
+            height: sizingInformation.isDesktop ? 103 : 50,
+            minWidth: sizingInformation.isDesktop ? 321 : 150,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4)
+            ),
+            child: MaterialButton(
+              child: Text('Erkunden',style: sizingInformation.isDesktop ? roboto28BlackWhite : roboto16WhiteBold,),
+              onPressed: ()=> print('Erkunden'),
+              color: Colors.black,
+            ),
+          )
+        ],
+      ),
     );
   }
 

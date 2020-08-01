@@ -13,7 +13,7 @@ class CommonDivider extends StatelessWidget {
         decoration: BoxDecoration(color: Colors.grey[600], boxShadow: [
           BoxShadow(offset: Offset(0, 1), blurRadius: 2, color: Colors.black26)
         ]),
-        height: 0.5,
+        height:sizingInformation.isDesktop ? 0.5 : 0.25,
         width: sizingInformation.screenSize.width/2.25,
       ),
     );
