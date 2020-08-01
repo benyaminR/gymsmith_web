@@ -28,26 +28,28 @@ class HomePage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+
                   SizedBox(
-                    height: 38,
+                    height: sizingInformation.isDesktop ? 38 : 19,
                   ),
+
                   HomePageSlideShowIntro(
                     duration: Duration(seconds: 1),
                     delay: Duration(seconds: 5),
                     sizingInformation: sizingInformation,
                   ),
                   SizedBox(
-                    height: 119,
+                    height: sizingInformation.isDesktop ? 120 : 60,
                   ),
                   DealsOfTheDayWidget(),
                   SizedBox(
-                    height: 45.5,
+                    height:sizingInformation.isDesktop ?  46 : 23,
                   ),
 
                   CommonDivider(),
 
                   SizedBox(
-                    height: 21.5,
+                    height: sizingInformation.isDesktop ?  21.5 : 11,
                   ),
                   HomePageBottomSlideShow(
                     duration: Duration(seconds: 1),
@@ -55,13 +57,13 @@ class HomePage extends StatelessWidget {
                   ),
 
                   SizedBox(
-                    height: 29.5,
+                    height: sizingInformation.isDesktop ? 29.5 : 15,
                   ),
 
                   CommonDivider(),
 
                   SizedBox(
-                    height: 235.5,
+                    height: sizingInformation.isDesktop ?  235.5 : 118,
                   ),
 
                   BottomNavBar(),
