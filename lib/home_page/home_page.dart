@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gymsmith_web/core/NonScrollBehavior.dart';
 import 'package:gymsmith_web/core/common_widgets/bottom_nav_bar.dart';
 import 'package:gymsmith_web/core/common_widgets/common_drawer.dart';
 import 'package:gymsmith_web/core/common_widgets/divider.dart';
@@ -13,56 +14,59 @@ import 'home_page_bottom_slide_show.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ResponsiveBuilder(
-      builder: (context, sizingInformation) => Scaffold(
-        appBar: PreferredSize(
-            child: CommonAppBar(),
-            preferredSize: Size(MediaQuery.of(context).size.width, 70)),
-        drawer: !sizingInformation.isDesktop ? CommonDrawer() : null,
-        body: SingleChildScrollView(
-          child: Container(
-            //height: 3979,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  height: 38,
-                ),
-                HomePageSlideShowIntro(
-                  duration: Duration(seconds: 1),
-                  delay: Duration(seconds: 5),
-                  sizingInformation: sizingInformation,
-                ),
-                SizedBox(
-                  height: 119,
-                ),
-                DealsOfTheDayWidget(),
-                SizedBox(
-                  height: 45.5,
-                ),
+    return ScrollConfiguration(
+      behavior: NonScrollBehavior(),
+      child: ResponsiveBuilder(
+        builder: (context, sizingInformation) => Scaffold(
+          appBar: PreferredSize(
+              child: CommonAppBar(),
+              preferredSize: Size(MediaQuery.of(context).size.width, 70)),
+          drawer: !sizingInformation.isDesktop ? CommonDrawer() : null,
+          body: SingleChildScrollView(
+            child: Container(
+              //height: 3979,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    height: 38,
+                  ),
+                  HomePageSlideShowIntro(
+                    duration: Duration(seconds: 1),
+                    delay: Duration(seconds: 5),
+                    sizingInformation: sizingInformation,
+                  ),
+                  SizedBox(
+                    height: 119,
+                  ),
+                  DealsOfTheDayWidget(),
+                  SizedBox(
+                    height: 45.5,
+                  ),
 
-                CommonDivider(),
+                  CommonDivider(),
 
-                SizedBox(
-                  height: 21.5,
-                ),
-                HomePageBottomSlideShow(
-                  duration: Duration(seconds: 1),
-                  delay: Duration(seconds: 5),
-                ),
+                  SizedBox(
+                    height: 21.5,
+                  ),
+                  HomePageBottomSlideShow(
+                    duration: Duration(seconds: 1),
+                    delay: Duration(seconds: 5),
+                  ),
 
-                SizedBox(
-                  height: 29.5,
-                ),
+                  SizedBox(
+                    height: 29.5,
+                  ),
 
-                CommonDivider(),
+                  CommonDivider(),
 
-                SizedBox(
-                  height: 235.5,
-                ),
+                  SizedBox(
+                    height: 235.5,
+                  ),
 
-                BottomNavBar(),
-              ],
+                  BottomNavBar(),
+                ],
+              ),
             ),
           ),
         ),
