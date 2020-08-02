@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gymsmith_web/core/utils/TextStyles/text_styles.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class TitleBar extends StatelessWidget {
   final String title;
@@ -8,17 +9,19 @@ class TitleBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: 64),
-        child: Container(
-          alignment: Alignment.center,
-          color: Colors.black,
-          width: 364,
-          height: 69,
-          child: Text(title,
-          style: roboto28BlackWhite,
+    return ResponsiveBuilder(
+      builder: (context, sizingInformation) => Align(
+        alignment: Alignment.centerLeft,
+        child: Padding(
+          padding:  EdgeInsets.only(bottom: sizingInformation.isDesktop ? 64.0 : 32.0),
+          child: Container(
+            alignment: Alignment.center,
+            color: Colors.black,
+            width: sizingInformation.isDesktop ? 364 : 180,
+            height: sizingInformation.isDesktop ? 69 : 35,
+            child: Text(title,
+              style: sizingInformation.isDesktop ? roboto28BoldWhite : roboto16WhiteBold,
+            ),
           ),
         ),
       ),

@@ -14,6 +14,7 @@ void main() {
 
   GetDealsOfTheDayUsecase getDealsOfTheDayUsecase;
   DealsOfTheDayBloc bloc;
+
   setUp((){
 
     getDealsOfTheDayUsecase = MockGetDealsOfTheDayUseCase();

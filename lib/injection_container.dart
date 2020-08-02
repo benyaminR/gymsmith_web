@@ -3,6 +3,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:get_it/get_it.dart';
 import 'package:gymsmith_web/core/slideshow/slide_show/slide_show_bloc.dart';
+import 'package:gymsmith_web/features/cart/data/datasources/cart_local_data_source.dart';
+import 'package:gymsmith_web/features/cart/data/repository/cart_repository_impl.dart';
+import 'package:gymsmith_web/features/cart/domain/repository/cart_repository.dart';
+import 'package:gymsmith_web/features/cart/domain/usecases/add_to_cart_usecase.dart';
+import 'package:gymsmith_web/features/cart/domain/usecases/get_cart_usecase.dart';
+import 'package:gymsmith_web/features/cart/domain/usecases/remove_from_the_cart_usecase.dart';
+import 'package:gymsmith_web/features/cart/presentation/bloc/cart/cart_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'core/networking/network_info.dart';
 import 'core/networking/network_info_impl.dart';
 import 'features/deals_of_the_day_list/data/datasources/items_remote_datasource.dart';
@@ -30,12 +38,30 @@ Future<void> init() async{
 
   sl.registerLazySingleton<ItemsRemoteDataSource>(() =>ItemsRemoteDataSourceImpl(firestore: sl()));
 
+  //cart
+  sl.registerFactory(() => CartBloc(
+      removeFromCartUseCase: sl(),
+      getCartUseCase: sl(),
+      addToCartUseCase: sl(),
+      initialState: sl()
+  ));
+
+  sl.registerSingleton(()=> RemoveFromCartUseCase(repository: sl()));
+  sl.registerSingleton(()=> AddToCartUseCase(repository: sl()));
+  sl.registerSingleton(()=> GetCartUseCase(repository: sl()));
+
+  sl.registerLazySingleton<CartRepository>(()=> CartRepositoryImpl(dataSource: sl()));
+  sl.registerLazySingleton<CartLocalDataSource>(()=> CartLocalDataSourceImpl(sharedPreferences: sl()));
+
+
 
   // Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(connectivity: sl()));
 
   //Externals
   sl.registerLazySingleton<Connectivity>(() => Connectivity());
+
+  sl.registerSingleton(()=>SharedPreferences.getInstance());
 
   //firestore
   /*

@@ -93,7 +93,7 @@ class _HomePageBottomSlideShowState extends State<HomePageBottomSlideShow> {
                 borderRadius: BorderRadius.circular(4)
             ),
             child: MaterialButton(
-              child: Text('Erkunden',style: sizingInformation.isDesktop ? roboto28BlackWhite : roboto16WhiteBold,),
+              child: Text('Erkunden',style: sizingInformation.isDesktop ? roboto28BoldWhite : roboto16WhiteBold,),
               onPressed: ()=> print('Erkunden'),
               color: Colors.black,
             ),

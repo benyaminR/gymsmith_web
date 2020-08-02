@@ -49,6 +49,8 @@ dependencies:
   firebase_auth_mocks: ^0.2.1
   google_sign_in_mocks: ^0.1.0+2
 
+  supercharged: ^1.7.0
+  simple_animations: ^2.2.1
 
 
   #bloc: ^6.0.1
@@ -57,7 +59,7 @@ dependencies:
   flutter_bloc: ^6.0.1
   google_fonts: ^1.1.0
   package_config: ^1.9.3
-
+  shared_preferences: ^0.5.8
   cupertino_icons: ^0.1.3
 
 dev_dependencies:
@@ -77,3 +79,14 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+  assets:
+    - assets/images/HomePageBottomSlide_00.png
+    - assets/images/HomePageBottomSlide_01.png
+    - assets/images/HomePageBottomSlide_02.png
+    - assets/images/Preview_00.png
+    - assets/images/Preview_01.png
+    - assets/images/Preview_02.png
+  fonts:
+    - family: CustomIcons
+      fonts:
+        - asset: assets/fonts/CustomIcons.ttf

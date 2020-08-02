@@ -15,7 +15,7 @@ class CommonAppBar extends StatelessWidget {
             children: [
               GestureDetector(
                   onTap: ()=> print('gymsmith'),
-                  child: Text("GYMSMITH",style: roboto28BlackWhite,)
+                  child: Text("GYMSMITH",style: roboto28BoldWhite,)
               ),
               _getCategoriesForSize(sizingInformation),
               Row(

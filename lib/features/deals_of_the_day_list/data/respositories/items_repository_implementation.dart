@@ -13,7 +13,6 @@ class ItemsRepositoryImplementation implements ItemsRepository{
 
   ItemsRepositoryImplementation({@required this.networkInfo, @required this.itemsRemoteDataSource});
 
-
   @override
   Future<Either<Failure, Items>> getItems() async{
     if(await networkInfo.isConnected()){
