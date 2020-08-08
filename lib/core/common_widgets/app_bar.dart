@@ -39,12 +39,8 @@ class CommonAppBar extends StatelessWidget {
                       child: BlocBuilder<CartBloc,CartState>(
                         builder: (context, state) {
                           print('current State of CartBloc is $state');
-                          if(state is CartAddState)
+                          if(state is CartUpdatedState)
                             return _updateCartIcon(state.updatedCart);
-                          else if(state is CartRemoveState)
-                            return _updateCartIcon(state.updatedCart);
-                          else if(state is CartGetState)
-                            return _updateCartIcon(state.cart);
                           return CircularProgressIndicator();
                         } ,
                       ),
@@ -58,6 +54,7 @@ class CommonAppBar extends StatelessWidget {
           toolbarHeight: 70,
         );
       },
+
     );
   }
 
@@ -94,10 +91,11 @@ class CommonAppBar extends StatelessWidget {
 
   Widget _updateCartIcon(Cart cart){
     return Stack(
+      alignment: Alignment.center,
       children: [
-        Icon(CustomIcons.cart,color: Colors.white,size: 45,),
+        Icon(CustomIcons.cart,color: Colors.white,size: 40,),
         Align(
-          alignment: Alignment.bottomRight,
+          alignment: Alignment.lerp(Alignment.topLeft, Alignment.bottomRight, 1.5),
           child: Container(
             alignment: Alignment.center,
             width: 20,
@@ -110,8 +108,8 @@ class CommonAppBar extends StatelessWidget {
               shadows: [
                 BoxShadow(
                   color: Black,
-                  blurRadius: 3.5,
-                  offset: Offset(0,3),
+                  blurRadius: 2,
+                  offset: Offset(0,2),
                 )
               ]
             ),
@@ -129,22 +127,3 @@ class CommonAppBar extends StatelessWidget {
   }
 }
 
-/*
-title: GestureDetector(
-onTap: ()=> print('gymsmith'),
-child: Text("GYMSMITH",style: roboto28BlackWhite,)
-),
-actions: [
-IconButton(
-icon: Icon(CustomIcons.search,color: core.Colors.white,),
-onPressed: ()=> print('search'),
-),
-IconButton(
-icon: Icon(CustomIcons.user,color: core.Colors.white),
-onPressed: ()=> print('user'),
-),
-IconButton(
-icon: Icon(CustomIcons.cart,color: core.Colors.white,size: 40,),
-onPressed: ()=> print('cart'),
-)
-],*/

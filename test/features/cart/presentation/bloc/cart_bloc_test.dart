@@ -1,12 +1,10 @@
 
-
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gymsmith_web/core/error/failure.dart';
 import 'package:gymsmith_web/core/usecase/no_params.dart';
 import 'package:gymsmith_web/core/usecase/params.dart';
 import 'package:gymsmith_web/features/cart/domain/entity/Cart.dart';
-import 'package:gymsmith_web/features/cart/domain/repository/cart_repository.dart';
 import 'package:gymsmith_web/features/cart/domain/usecases/add_to_cart_usecase.dart';
 import 'package:gymsmith_web/features/cart/domain/usecases/get_cart_usecase.dart';
 import 'package:gymsmith_web/features/cart/domain/usecases/remove_from_the_cart_usecase.dart';
@@ -26,22 +24,21 @@ void main() {
   final cartBloc = CartBloc(initialState: InitialCartState(),addToCartUseCase: addUsecase,getCartUseCase: getUseCase,removeFromCartUseCase: removeUsecase);
 
   group('CartBloc',(){
+    final item = 'item';
+    final cart = Cart();
 
     group('Remove',(){
-      final item = 'item';
 
-
-
-      test('should return item back', () async {
+      test('should return updated Cart back', () async {
         //arrange
-        when(removeUsecase(WithParams(param: item))).thenAnswer((_) async => Right(item));
+        when(removeUsecase(WithParams(param: item))).thenAnswer((_) async => Right(cart));
 
         //act
         cartBloc.add(RemoveItemFromCartEvent(item: item));
         await untilCalled(removeUsecase(WithParams(param: item)));
         //assert
         verify(removeUsecase(WithParams(param: item)));
-        expectLater(cartBloc, emits(CartRemoveState(target: item)));
+        expectLater(cartBloc, emits(CartRemoveState()));
 
       });
 
@@ -57,22 +54,37 @@ void main() {
         expectLater(cartBloc, emits(CartFailureState()));
       });
 
+      test('should emit [ CartRemoveState, CartUpdatedState ]',() async{
+
+        //arrange
+        when(removeUsecase(WithParams(param: item))).thenAnswer((_) async => Right(cart));
+
+        //act
+        cartBloc.add(RemoveItemFromCartEvent(item: item));
+        await untilCalled(removeUsecase(WithParams(param: item)));
+        final expected = [CartRemoveState(),CartUpdatedState(updatedCart: cart)];
+        //assert
+        verify(removeUsecase(WithParams(param: item)));
+        expectLater(cartBloc,emitsInOrder(expected));
+
+      });
+
     });
 
     group('Add',(){
 
-      test('should return item back', () async {
+      test('should return updated Cart back', () async {
 
         //arrange
         final item = 'item';
-        when(addUsecase(WithParams(param: item))).thenAnswer((_) async => Right(item));
+        when(addUsecase(WithParams(param: item))).thenAnswer((_) async => Right(cart));
 
         //act
         cartBloc.add(AddItemToCartEvent(item: item));
         await untilCalled(addUsecase(WithParams(param: item)));
         //assert
         verify(addUsecase(WithParams(param: item)));
-        expectLater(cartBloc, emits(CartAddState(target: item)));
+        expectLater(cartBloc, emits(CartAddState()));
 
       });
 
@@ -89,11 +101,25 @@ void main() {
         expectLater(cartBloc, emits(CartFailureState()));
       });
 
+      test('should emit [CartAddState, CartUpdatedState]',() async{
+        //arrange
+        when(addUsecase(WithParams(param: item))).thenAnswer((_) async => Right(cart));
+
+        //act
+        cartBloc.add(AddItemToCartEvent(item: item));
+        await untilCalled(addUsecase(WithParams(param: item)));
+        final expected = [CartAddState(),CartUpdatedState(updatedCart: cart)];
+        //assert
+        verify(addUsecase(WithParams(param: item)));
+        expectLater(cartBloc,emitsInOrder(expected));
+
+      });
+
     });
 
     group('Get',(){
 
-      test('should return item back', () async {
+      test('should return updated cart back', () async {
 
         //arrange
         final cart = Cart();
@@ -104,7 +130,7 @@ void main() {
         await untilCalled(getUseCase(NoParams()));
         //assert
         verify(getUseCase(NoParams()));
-        expectLater(cartBloc, emits(CartGetState(cart: cart)));
+        expectLater(cartBloc, emits(CartGetState()));
 
       });
 
@@ -117,6 +143,21 @@ void main() {
         //assert
         expectLater(cartBloc, emits(CartFailureState()));
       });
+
+      test('should emit [CartGetState, CartUpdatedState]',() async{
+        //arrange
+        when(getUseCase(NoParams())).thenAnswer((_) async => Right(cart));
+
+        //act
+        cartBloc.add(GetCartEvent());
+        await untilCalled(getUseCase(NoParams()));
+        final expected = [CartGetState(),CartUpdatedState(updatedCart: cart)];
+        //assert
+        verify(getUseCase(NoParams()));
+        expectLater(cartBloc,emitsInOrder(expected));
+
+      });
+
     });
 
   });

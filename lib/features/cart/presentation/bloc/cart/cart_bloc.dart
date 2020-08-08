@@ -28,26 +28,40 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   Stream<CartState> mapEventToState(CartEvent event) async* {
     if(event is GetCartEvent){
       var item = await getCartUseCase(NoParams());
-      yield item.fold(
-              (l) => CartFailureState(),
-              (r) => CartGetState(cart: r)
+      yield* item.fold(
+              (l) async* {
+                yield CartFailureState();
+              },
+              (r) async* {
+                yield CartGetState();
+                yield CartUpdatedState(updatedCart: r);
+              }
       );
     }else if(event is RemoveItemFromCartEvent){
       var item = await removeFromCartUseCase(WithParams(param: event.item));
-      yield item.fold(
-              (l) => CartFailureState(),
-              (r) => CartRemoveState( updatedCart : r)
+      yield* item.fold(
+              (l) async* {
+                yield CartFailureState();
+              },
+              (r) async* {
+                yield CartRemoveState();
+                yield CartUpdatedState(updatedCart: r);
+              }
       );
+
 
     }else if(event is AddItemToCartEvent){
       var item = await addToCartUseCase(WithParams(param: event.item));
       print(event.item);
-      yield item.fold(
-              (l) => CartFailureState(),
-              (r) => CartAddState(updatedCart: r)
-      );
+      yield* item.fold(
+              (l) async* {
+            yield CartFailureState();
+          },
+              (r) async* {
+            yield CartAddState();
+            yield CartUpdatedState(updatedCart: r);
+          });
     }
   }
-
 
 }

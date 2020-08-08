@@ -6,6 +6,7 @@ import 'package:gymsmith_web/core/error/failure.dart';
 import 'package:gymsmith_web/features/cart/data/datasources/cart_local_data_source.dart';
 import 'package:gymsmith_web/features/cart/data/model/cart_model.dart';
 import 'package:gymsmith_web/features/cart/data/repository/cart_repository_impl.dart';
+import 'package:gymsmith_web/features/cart/domain/entity/Cart.dart';
 import 'package:mockito/mockito.dart';
 
 class MockCartLocalDataSource extends Mock implements CartLocalDataSource{}
@@ -15,6 +16,7 @@ void main() {
   final repo = CartRepositoryImpl(dataSource: dataSource);
 
   final cartItem = 'itemPath';
+  final cart = Cart();
 
   group('Repository ', () {
 
@@ -31,7 +33,7 @@ void main() {
 
       test('should add successfully', () async{
         //arrange
-        when(dataSource.add(cartItem)).thenAnswer((_) async => cartItem);
+        when(dataSource.add(cartItem)).thenAnswer((_) async => cart);
         var expected = await dataSource.add(cartItem);
         //act
         var res = await repo.add(cartItem);
@@ -84,7 +86,7 @@ void main() {
 
     test('should remove successfully', () async{
       //arrange
-      when(dataSource.remove(cartItem)).thenAnswer((_) async => cartItem);
+      when(dataSource.remove(cartItem)).thenAnswer((_) async => cart);
       var expected =  await dataSource.remove(cartItem);
       //act
       var res =  await repo.remove(cartItem);
