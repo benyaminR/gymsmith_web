@@ -36,14 +36,15 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       var item = await removeFromCartUseCase(WithParams(param: event.item));
       yield item.fold(
               (l) => CartFailureState(),
-              (r) => CartRemoveState(target: r)
+              (r) => CartRemoveState( updatedCart : r)
       );
 
     }else if(event is AddItemToCartEvent){
       var item = await addToCartUseCase(WithParams(param: event.item));
+      print(event.item);
       yield item.fold(
               (l) => CartFailureState(),
-              (r) => CartAddState(target: r)
+              (r) => CartAddState(updatedCart: r)
       );
     }
   }

@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gymsmith_web/core/custom_icons/custom_icons_icons.dart';
+import 'package:gymsmith_web/core/utils/Colors/color_swatches.dart';
 import 'package:gymsmith_web/core/utils/TextStyles/text_styles.dart';
+import 'package:gymsmith_web/features/cart/domain/entity/Cart.dart';
+import 'package:gymsmith_web/features/cart/presentation/bloc/cart/cart_bloc.dart';
+import 'package:gymsmith_web/injection_container.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 
@@ -29,9 +34,23 @@ class CommonAppBar extends StatelessWidget {
                     onPressed: ()=> print('user'),
                   ),
                   IconButton(
-                    icon: Icon(CustomIcons.cart,color: Colors.white,size: 40,),
-                    onPressed: ()=> print('cart'),
-                  ),
+                    icon: BlocProvider<CartBloc>(
+                      create: (context) => sl<CartBloc>()..add(GetCartEvent()),
+                      child: BlocBuilder<CartBloc,CartState>(
+                        builder: (context, state) {
+                          print('current State of CartBloc is $state');
+                          if(state is CartAddState)
+                            return _updateCartIcon(state.updatedCart);
+                          else if(state is CartRemoveState)
+                            return _updateCartIcon(state.updatedCart);
+                          else if(state is CartGetState)
+                            return _updateCartIcon(state.cart);
+                          return CircularProgressIndicator();
+                        } ,
+                      ),
+                    ),
+                    onPressed: () => print('cart'),
+                  )
                 ],
               )
             ],
@@ -71,6 +90,42 @@ class CommonAppBar extends StatelessWidget {
       );
     }
     return Container();
+  }
+
+  Widget _updateCartIcon(Cart cart){
+    return Stack(
+      children: [
+        Icon(CustomIcons.cart,color: Colors.white,size: 45,),
+        Align(
+          alignment: Alignment.bottomRight,
+          child: Container(
+            alignment: Alignment.center,
+            width: 20,
+            height: 20,
+            decoration: ShapeDecoration(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(180)
+              ),
+              color: White,
+              shadows: [
+                BoxShadow(
+                  color: Black,
+                  blurRadius: 3.5,
+                  offset: Offset(0,3),
+                )
+              ]
+            ),
+            child: Text('${cart.items != null ? cart.items.length : 0}',
+              style: TextStyle(
+              color: Black,
+              fontSize: 10,
+                fontWeight: FontWeight.bold
+            ),
+            ),
+          ),
+        )
+      ],
+    );
   }
 }
 

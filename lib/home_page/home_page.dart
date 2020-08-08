@@ -21,7 +21,7 @@ class HomePage extends StatelessWidget {
           appBar: PreferredSize(
               child: CommonAppBar(),
               preferredSize: Size(MediaQuery.of(context).size.width, 70)),
-          drawer: !sizingInformation.isDesktop ? CommonDrawer() : null,
+          drawer : !sizingInformation.isDesktop ? CommonDrawer() : null,
           body: SingleChildScrollView(
             child: Container(
               //height: 3979,

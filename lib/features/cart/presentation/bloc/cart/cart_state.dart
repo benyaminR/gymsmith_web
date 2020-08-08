@@ -25,20 +25,20 @@ class CartGetState extends CartState {
 
 class CartRemoveState extends CartState {
 
-  final String target;
+  final Cart updatedCart;
 
-  CartRemoveState({@required this.target});
+  CartRemoveState({this.updatedCart});
 
   @override
-  List<Object> get props => [target];
+  List<Object> get props => [updatedCart];
 }
 
 class CartAddState extends CartState {
 
-  final String target;
+  final Cart updatedCart;
 
-  CartAddState({@required this.target});
+  CartAddState({@required this.updatedCart});
 
   @override
-  List<Object> get props => [target];
+  List<Object> get props => [];
 }

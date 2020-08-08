@@ -5,10 +5,10 @@ import 'package:gymsmith_web/features/cart/domain/entity/Cart.dart';
 
 abstract class CartRepository{
   ///
-  Future<Either<Failure,String>> add(String cartItem);
+  Future<Either<Failure,Cart>> add(String cartItem);
   ///
   Future<Either<Failure,Cart>> get();
   ///
-  Future<Either<Failure,String>> remove(String cartItem);
+  Future<Either<Failure,Cart>> remove(String cartItem);
 
 } 

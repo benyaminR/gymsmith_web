@@ -23,7 +23,8 @@ import 'features/deals_of_the_day_list/presenation/deals_of_the_day/deals_of_the
 
 final sl = GetIt.instance;
 
-Future<void> init() async{
+Future<void> init() async {
+
   //Features
 
   //deals of the day
@@ -39,16 +40,16 @@ Future<void> init() async{
   sl.registerLazySingleton<ItemsRemoteDataSource>(() =>ItemsRemoteDataSourceImpl(firestore: sl()));
 
   //cart
-  sl.registerFactory(() => CartBloc(
+  sl.registerLazySingleton(() => CartBloc(
       removeFromCartUseCase: sl(),
       getCartUseCase: sl(),
       addToCartUseCase: sl(),
-      initialState: sl()
+      initialState: InitialCartState()
   ));
 
-  sl.registerSingleton(()=> RemoveFromCartUseCase(repository: sl()));
-  sl.registerSingleton(()=> AddToCartUseCase(repository: sl()));
-  sl.registerSingleton(()=> GetCartUseCase(repository: sl()));
+  sl.registerLazySingleton(()=> RemoveFromCartUseCase(repository: sl()));
+  sl.registerLazySingleton(()=> AddToCartUseCase(repository: sl()));
+  sl.registerLazySingleton(()=> GetCartUseCase(repository: sl()));
 
   sl.registerLazySingleton<CartRepository>(()=> CartRepositoryImpl(dataSource: sl()));
   sl.registerLazySingleton<CartLocalDataSource>(()=> CartLocalDataSourceImpl(sharedPreferences: sl()));
@@ -61,7 +62,8 @@ Future<void> init() async{
   //Externals
   sl.registerLazySingleton<Connectivity>(() => Connectivity());
 
-  sl.registerSingleton(()=>SharedPreferences.getInstance());
+  final sharedPreferences = await SharedPreferences.getInstance();
+  sl.registerLazySingleton(()=> sharedPreferences);
 
   //firestore
   /*

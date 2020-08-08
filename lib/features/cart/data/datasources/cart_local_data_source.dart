@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:gymsmith_web/features/cart/data/model/cart_model.dart';
+import 'package:gymsmith_web/features/cart/domain/entity/Cart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class CartLocalDataSource{
@@ -9,8 +10,8 @@ abstract class CartLocalDataSource{
   CartLocalDataSource({@required this.sharedPreferences});
 
   Future<CartModel> get();
-  Future<String> add(String item);
-  Future<String> remove(String item);
+  Future<Cart> add(String item);
+  Future<Cart> remove(String item);
 }
 
 class CartLocalDataSourceImpl extends CartLocalDataSource{
@@ -20,11 +21,11 @@ class CartLocalDataSourceImpl extends CartLocalDataSource{
   CartLocalDataSourceImpl({@required this.sharedPreferences});
 
   @override
-  Future<String> add(String item) async {
-    var items = sharedPreferences.getStringList('cart');
+  Future<Cart> add(String item) async {
+    var items = sharedPreferences.getStringList('cart') == null ? List<String>() : sharedPreferences.getStringList('cart');
     items.add(item);
     await sharedPreferences.setStringList('cart', items);
-    return Future.value(item);
+    return get();
   }
 
 
@@ -35,11 +36,11 @@ class CartLocalDataSourceImpl extends CartLocalDataSource{
 
 
   @override
-  Future<String> remove(String item) async {
+  Future<Cart> remove(String item) async {
     List<String> items = sharedPreferences.getStringList('cart');
     items.remove(item);
     await sharedPreferences.setStringList('cart', items);
-    return Future.value(item);
+    return get();
   }
 
 }

@@ -13,7 +13,7 @@ class CartRepositoryImpl implements CartRepository{
   CartRepositoryImpl({@required this.dataSource});
 
   @override
-  Future<Either<Failure, String>> add(String cartItem) async {
+  Future<Either<Failure, Cart>> add(String cartItem) async {
     try{
       return Right(await dataSource.add(cartItem));
     }on ServerException{
@@ -31,7 +31,7 @@ class CartRepositoryImpl implements CartRepository{
   }
 
   @override
-  Future<Either<Failure, String>> remove(String cartItem) async {
+  Future<Either<Failure, Cart>> remove(String cartItem) async {
     try{
       return Right(await dataSource.remove(cartItem));
     }on ServerException{
