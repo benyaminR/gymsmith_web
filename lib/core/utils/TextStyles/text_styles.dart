@@ -20,9 +20,9 @@ final TextStyle roboto12WhiteBold = GoogleFonts.roboto(color: Colors.white,fontS
 final TextStyle roboto8White = GoogleFonts.roboto(color: Colors.white,fontSize: 8);
 
 
-final TextStyle roboto28BlackGrey = GoogleFonts.roboto(color: Colors.grey,fontSize: 28,fontWeight: FontWeight.bold);
-final TextStyle roboto16Grey = GoogleFonts.roboto(color: Colors.grey,fontSize: 16);
-final TextStyle roboto16GreyUnderline = GoogleFonts.roboto(color: Colors.grey,fontSize: 16,fontStyle: FontStyle.italic,decoration: TextDecoration.underline);
-final TextStyle roboto16GreyBold = GoogleFonts.roboto(color: Colors.grey,fontSize: 16,fontWeight: FontWeight.bold);
-final TextStyle roboto12Grey = GoogleFonts.roboto(color: Colors.grey,fontSize: 12);
-final TextStyle roboto8Grey = GoogleFonts.roboto(color: Colors.grey,fontSize: 8);
+final TextStyle roboto28Grey = GoogleFonts.roboto(color: Colors.grey[500],fontSize: 28,fontWeight: FontWeight.bold);
+final TextStyle roboto16Grey = GoogleFonts.roboto(color: Colors.grey[500],fontSize: 16);
+final TextStyle roboto16GreyUnderline = GoogleFonts.roboto(color: Colors.grey[500],fontSize: 16,fontStyle: FontStyle.italic,decoration: TextDecoration.underline);
+final TextStyle roboto16GreyBold = GoogleFonts.roboto(color: Colors.grey[500],fontSize: 16,fontWeight: FontWeight.bold);
+final TextStyle roboto12Grey = GoogleFonts.roboto(color: Colors.grey[500],fontSize: 12);
+final TextStyle roboto8Grey = GoogleFonts.roboto(color: Colors.grey[500],fontSize: 8);

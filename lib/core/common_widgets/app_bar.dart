@@ -8,7 +8,6 @@ import 'package:gymsmith_web/features/cart/presentation/bloc/cart/cart_bloc.dart
 import 'package:gymsmith_web/injection_container.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-
 class CommonAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
