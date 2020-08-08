@@ -6,6 +6,7 @@ import 'package:gymsmith_web/core/common_widgets/divider.dart';
 import 'package:gymsmith_web/core/utils/Colors/color_swatches.dart';
 import 'package:gymsmith_web/core/utils/TextStyles/text_styles.dart';
 
+
 class CartPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {

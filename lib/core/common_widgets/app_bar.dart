@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gymsmith_web/cart_page/cart_page.dart';
 import 'package:gymsmith_web/core/custom_icons/custom_icons_icons.dart';
+import 'package:gymsmith_web/core/navigation/navigation_bloc.dart';
 import 'package:gymsmith_web/core/utils/Colors/color_swatches.dart';
 import 'package:gymsmith_web/core/utils/TextStyles/text_styles.dart';
 import 'package:gymsmith_web/features/cart/domain/entity/Cart.dart';
 import 'package:gymsmith_web/features/cart/presentation/bloc/cart/cart_bloc.dart';
+import 'package:gymsmith_web/home_page/home_page.dart';
 import 'package:gymsmith_web/injection_container.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -18,7 +21,7 @@ class CommonAppBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               GestureDetector(
-                  onTap: ()=> print('gymsmith'),
+                  onTap: ()=> sl<NavigationBloc>().add(ChangePageEvent(widget: HomePage(sizingInformation: sizingInformation,))),
                   child: Text("GYMSMITH",style: roboto28BoldWhite,)
               ),
               _getCategoriesForSize(sizingInformation),
@@ -44,7 +47,7 @@ class CommonAppBar extends StatelessWidget {
                         } ,
                       ),
                     ),
-                    onPressed: () => print('cart'),
+                    onPressed: () =>  sl<NavigationBloc>().add(ChangePageEvent(widget: CartPage())),
                   )
                 ],
               )

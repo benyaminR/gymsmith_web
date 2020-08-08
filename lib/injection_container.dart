@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:get_it/get_it.dart';
+import 'package:gymsmith_web/core/navigation/navigation_bloc.dart';
 import 'package:gymsmith_web/core/slideshow/slide_show/slide_show_bloc.dart';
 import 'package:gymsmith_web/features/cart/data/datasources/cart_local_data_source.dart';
 import 'package:gymsmith_web/features/cart/data/repository/cart_repository_impl.dart';
@@ -58,6 +59,8 @@ Future<void> init() async {
 
   // Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(connectivity: sl()));
+
+  sl.registerLazySingleton(() => NavigationBloc(LoadingNavigationState()));
 
   //Externals
   sl.registerLazySingleton<Connectivity>(() => Connectivity());

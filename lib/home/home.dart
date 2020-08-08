@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:gymsmith_web/cart_page/cart_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gymsmith_web/core/NonScrollBehavior.dart';
 import 'package:gymsmith_web/core/common_widgets/app_bar.dart';
 import 'package:gymsmith_web/core/common_widgets/bottom_nav_bar.dart';
 import 'package:gymsmith_web/core/common_widgets/common_drawer.dart';
+import 'package:gymsmith_web/core/navigation/navigation_bloc.dart';
+import 'package:gymsmith_web/home_page/home_page.dart';
+import 'package:gymsmith_web/injection_container.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class Home extends StatelessWidget {
@@ -22,12 +25,29 @@ class Home extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    CartPage(),
+                    _getCurrentPage(),
                     BottomNavBar()
                   ],
                 ),
               ),
             )
+        ),
+      ),
+    );
+  }
+
+  Widget _getCurrentPage(){
+    return ResponsiveBuilder(
+      builder:(context, sizingInformation) =>  BlocProvider<NavigationBloc>(
+        create:(context) => sl<NavigationBloc>()..add(ChangePageEvent(widget: HomePage(sizingInformation: sizingInformation,))) ,
+        child: BlocBuilder<NavigationBloc,NavigationState>(
+          builder: (context, state) {
+            if(state is LoadedNavigationState)
+              return state.widget;
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          },
         ),
       ),
     );
