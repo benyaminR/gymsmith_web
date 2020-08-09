@@ -15,10 +15,10 @@ void main() {
     test('should emit in order [LoadedNavigationState]', () async{
 
       //arrange
-      var expected = [LoadingNavigationState(),LoadedNavigationState( widget : container, previous : previous)];
+      var expected = [LoadingNavigationState(),LoadedNavigationState( widget : container, previous : bloc.previous)];
 
       //act
-      bloc.add(ChangePageEvent(widget:container, previous : container));
+      bloc.add(ChangePageEvent(widget:container));
 
       //assert
       await expectLater(bloc, emitsInOrder(expected));

@@ -42,7 +42,7 @@ class Home extends StatelessWidget {
   Widget _getCurrentPage(){
     return ResponsiveBuilder(
       builder:(context, sizingInformation) =>  BlocProvider<NavigationBloc>(
-        create:(context) => sl<NavigationBloc>()..add(ChangePageEvent(widget: HomePage(sizingInformation: sizingInformation,),previous: Container())) ,
+        create:(context) => sl<NavigationBloc>()..add(ChangePageEvent(widget: HomePage(sizingInformation: sizingInformation,))) ,
         child: BlocBuilder<NavigationBloc,NavigationState>(
           builder: (context, state) {
             if(state is LoadedNavigationState) {
@@ -53,19 +53,19 @@ class Home extends StatelessWidget {
                 tween: 0.0.tweenTo(1.0),
                 duration: Duration(milliseconds: 500),
                 curve: Curves.easeOut,
-                builder: (context, child, value) => Stack(
+                builder: (context, child, value) => /*Stack(
                   alignment: Alignment.center,
-                  children: [
+                  children: [*/
                     Opacity(
                       opacity: value,
                       child: currentWidget,
                     ),
-                    Opacity(
+/*                    Opacity(
                       opacity: (value-1).abs(),
                       child: previousWidget,
-                    )
-                  ],
-                ),
+                    )*/
+/*                  ],
+                ),*/
               );
             }
             return Center(

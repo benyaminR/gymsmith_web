@@ -12,6 +12,7 @@ import 'package:gymsmith_web/injection_container.dart';
 
 class ProductsPage extends StatelessWidget{
 
+  
   final DealsOfTheDayEvent event;
   final String imageText;
   final String imagePath;

@@ -6,11 +6,10 @@ abstract class NavigationEvent extends Equatable {
 
 class ChangePageEvent extends NavigationEvent{
   final Widget widget;
-  final Widget previous;
 
-  ChangePageEvent({@required this.widget, @required this.previous});
+  ChangePageEvent({@required this.widget});
 
   @override
-  List<Object> get props => [widget,previous];
+  List<Object> get props => [widget];
 
 }
