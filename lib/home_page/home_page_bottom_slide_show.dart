@@ -19,6 +19,8 @@ class HomePageBottomSlideShow extends StatefulWidget {
 class _HomePageBottomSlideShowState extends State<HomePageBottomSlideShow> {
   Widget previous = Container();
   Widget current = Container();
+  Timer timer;
+
   int index = 0;
   String topText = 'Steigere deine Leistung.';
 
@@ -104,7 +106,7 @@ class _HomePageBottomSlideShowState extends State<HomePageBottomSlideShow> {
   }
 
   _setUp(){
-    Timer.periodic(widget.delay, (timer) {
+    timer = Timer.periodic(widget.delay, (timer) {
       setState(() {
         index++;
         if(index >= slides.length) index = 0;
@@ -114,6 +116,12 @@ class _HomePageBottomSlideShowState extends State<HomePageBottomSlideShow> {
         previous = slides[previousIndex];
       });
     });
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
   }
 }
 

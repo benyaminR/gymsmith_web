@@ -4,7 +4,6 @@ import 'package:gymsmith_web/home/home.dart';
 import 'core/utils/Colors/color_swatches.dart';
 import 'package:gymsmith_web/injection_container.dart';
 
-
 void main() async{
   await init();
   await pumpData();

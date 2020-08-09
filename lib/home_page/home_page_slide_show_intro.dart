@@ -10,7 +10,7 @@ class HomePageSlideShowIntro extends StatefulWidget {
   final Duration duration;
   final SizingInformation sizingInformation;
 
-  const HomePageSlideShowIntro({Key key, @required this.delay,@required this.duration, @required this.sizingInformation}) : super(key: key);
+  HomePageSlideShowIntro({Key key, @required this.delay,@required this.duration, @required this.sizingInformation}) : super(key: key);
 
   @override
   _HomePageSlideShowIntroState createState() => _HomePageSlideShowIntroState(delay: delay,duration: duration,sizingInformation: sizingInformation);
@@ -21,6 +21,8 @@ class _HomePageSlideShowIntroState extends State<HomePageSlideShowIntro> {
   final Duration delay;
   final Duration duration;
   final SizingInformation sizingInformation;
+
+  Timer timer;
 
   Widget previous = Container();
   Widget current = Container();
@@ -61,7 +63,7 @@ class _HomePageSlideShowIntroState extends State<HomePageSlideShowIntro> {
   }
 
   _setUp(){
-    Timer.periodic(delay, (timer) {
+    timer = Timer.periodic(delay, (timer) {
       setState(() {
         index++;
         if(index >= max) index = 0;
@@ -72,6 +74,13 @@ class _HomePageSlideShowIntroState extends State<HomePageSlideShowIntro> {
       });
     });
   }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
+
 }
 
 class HomePageIntroSlide extends StatelessWidget{
@@ -126,6 +135,5 @@ class HomePageIntroSlide extends StatelessWidget{
       ),
     );
   }
-
 }
 
