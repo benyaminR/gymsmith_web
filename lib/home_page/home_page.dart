@@ -53,8 +53,6 @@ class HomePage extends StatelessWidget {
         SizedBox(
           height: sizingInformation.isDesktop ? 235.5 : 118,
         ),
-
-        BottomNavBar(),
       ],
     );
   }
