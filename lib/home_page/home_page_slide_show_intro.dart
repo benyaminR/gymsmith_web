@@ -41,7 +41,6 @@ class _HomePageSlideShowIntroState extends State<HomePageSlideShowIntro> {
   @override
   Widget build(BuildContext context) {
     widget.sizingInformation.isDesktop;
-
     return CustomAnimation<double>(
       control: CustomAnimationControl.PLAY_FROM_START,
       tween: 0.0.tweenTo(1.0),

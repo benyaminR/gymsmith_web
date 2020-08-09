@@ -7,22 +7,22 @@ import 'package:mockito/mockito.dart';
 
 void main() {
   final bloc = NavigationBloc(LoadingNavigationState());
+  final container = Container();
+  final previous = Container();
 
   group('NavigationBloc', (){
 
     test('should emit in order [LoadedNavigationState]', () async{
 
-      var container = Container();
-
       //arrange
-      var expected = [LoadedNavigationState( widget : container)];
+      var expected = [LoadingNavigationState(),LoadedNavigationState( widget : container, previous : previous)];
 
       //act
-      bloc.add(ChangePageEvent(widget:container));
+      bloc.add(ChangePageEvent(widget:container, previous : container));
 
       //assert
       await expectLater(bloc, emitsInOrder(expected));
-
     });
   });
+
 }

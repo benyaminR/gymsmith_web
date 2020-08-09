@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gymsmith_web/core/NonScrollBehavior.dart';
@@ -8,6 +9,8 @@ import 'package:gymsmith_web/core/navigation/navigation_bloc.dart';
 import 'package:gymsmith_web/home_page/home_page.dart';
 import 'package:gymsmith_web/injection_container.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:simple_animations/simple_animations.dart';
+import 'package:supercharged/supercharged.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -20,7 +23,7 @@ class Home extends StatelessWidget {
                 child: CommonAppBar(),
                 preferredSize: Size(MediaQuery.of(context).size.width, 70)),
             drawer : !sizingInformation.isDesktop ? CommonDrawer() : null,
-            body:SingleChildScrollView(
+            body : SingleChildScrollView(
               child: Container(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -39,11 +42,32 @@ class Home extends StatelessWidget {
   Widget _getCurrentPage(){
     return ResponsiveBuilder(
       builder:(context, sizingInformation) =>  BlocProvider<NavigationBloc>(
-        create:(context) => sl<NavigationBloc>()..add(ChangePageEvent(widget: HomePage(sizingInformation: sizingInformation,))) ,
+        create:(context) => sl<NavigationBloc>()..add(ChangePageEvent(widget: HomePage(sizingInformation: sizingInformation,),previous: Container())) ,
         child: BlocBuilder<NavigationBloc,NavigationState>(
           builder: (context, state) {
-            if(state is LoadedNavigationState)
-              return state.widget;
+            if(state is LoadedNavigationState) {
+              final currentWidget = state.widget;
+              final previousWidget = state.previous;
+              return CustomAnimation<double>(
+                control: CustomAnimationControl.PLAY_FROM_START,
+                tween: 0.0.tweenTo(1.0),
+                duration: Duration(milliseconds: 500),
+                curve: Curves.easeOut,
+                builder: (context, child, value) => Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Opacity(
+                      opacity: value,
+                      child: currentWidget,
+                    ),
+                    Opacity(
+                      opacity: (value-1).abs(),
+                      child: previousWidget,
+                    )
+                  ],
+                ),
+              );
+            }
             return Center(
               child: CircularProgressIndicator(),
             );

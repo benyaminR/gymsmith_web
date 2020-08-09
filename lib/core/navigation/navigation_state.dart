@@ -15,7 +15,9 @@ class InitialNavigationState extends NavigationState {
 
 class LoadedNavigationState extends NavigationState{
   final Widget widget;
-  LoadedNavigationState({@required this.widget});
+  final Widget previous;
+
+  LoadedNavigationState({@required this.widget, @required this.previous});
   @override
-  List<Object> get props => [widget];
+  List<Object> get props => [widget,previous];
 }

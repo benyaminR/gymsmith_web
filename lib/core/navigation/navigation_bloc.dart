@@ -19,8 +19,9 @@ class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
   Stream<NavigationState> mapEventToState(NavigationEvent event) async* {
     if(event is ChangePageEvent) {
      final widget = event.widget == null ? Container() : event.widget;
+     final previous = event.previous == null ? Container() : event.previous;
      yield LoadingNavigationState();
-     yield LoadedNavigationState(widget: widget);
+     yield LoadedNavigationState(widget: widget,previous: previous);
     }
   }
 }
