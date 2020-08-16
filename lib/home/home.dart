@@ -53,19 +53,11 @@ class Home extends StatelessWidget {
                 tween: 0.0.tweenTo(1.0),
                 duration: Duration(milliseconds: 500),
                 curve: Curves.easeOut,
-                builder: (context, child, value) => /*Stack(
-                  alignment: Alignment.center,
-                  children: [*/
+                builder: (context, child, value) =>
                     Opacity(
                       opacity: value,
                       child: currentWidget,
                     ),
-/*                    Opacity(
-                      opacity: (value-1).abs(),
-                      child: previousWidget,
-                    )*/
-/*                  ],
-                ),*/
               );
             }
             return Center(

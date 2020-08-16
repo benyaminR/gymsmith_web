@@ -5,11 +5,11 @@ import 'package:gymsmith_web/core/custom_icons/custom_icons_icons.dart';
 import 'package:gymsmith_web/core/navigation/navigation_bloc.dart';
 import 'package:gymsmith_web/core/utils/Colors/color_swatches.dart';
 import 'package:gymsmith_web/core/utils/TextStyles/text_styles.dart';
+import 'package:gymsmith_web/core/utils/translation/translation_codes.dart';
+import 'package:gymsmith_web/core/utils/translation/translator.dart';
 import 'package:gymsmith_web/features/cart/domain/entity/Cart.dart';
 import 'package:gymsmith_web/features/cart/presentation/bloc/cart/cart_bloc.dart';
 import 'package:gymsmith_web/features/deals_of_the_day_list/presenation/deals_of_the_day/deals_of_the_day_bloc.dart';
-import 'package:gymsmith_web/features/globalization/domain/repositories/globalizationRepository.dart';
-import 'package:gymsmith_web/features/globalization/presentation/globalization/globalization_bloc.dart';
 import 'package:gymsmith_web/home_page/home_page.dart';
 import 'package:gymsmith_web/injection_container.dart';
 import 'package:gymsmith_web/products_page/products_page.dart';
@@ -74,28 +74,28 @@ class CommonAppBar extends StatelessWidget {
                 widget: ProductsPage(
                   event: GetDealsOfTheDay(),
                   imagePath: 'assets/images/Preview_02.png',
-                  imageText:'Alles, was man braucht, findest du bei uns.' ,
-                  titleText: 'Alle',
+                  imageText: sl<Translator>().translate(TranslationCodes.HOMEPAGE_IMAGE_TEXT) ,
+                  titleText: sl<Translator>().translate(TranslationCodes.ALL),
                 )
             )
             ),
-            child: Text('Alle', style: roboto16WhiteBold,),
+            child: Text(sl<Translator>().translate(TranslationCodes.ALL), style: roboto16WhiteBold,),
           ),
           FlatButton(
             onPressed: () => print('T-Shirts'),
-            child: Text('Shirts', style: roboto16WhiteBold,),
+            child: Text(sl<Translator>().translate(TranslationCodes.SHIRTS), style: roboto16WhiteBold,),
           ),
           FlatButton(
             onPressed: () => print('Shorts'),
-            child: Text('Shorts', style: roboto16WhiteBold,),
+            child: Text(sl<Translator>().translate(TranslationCodes.SHORTS), style: roboto16WhiteBold,),
           ),
           FlatButton(
             onPressed: () => print('Hoodies'),
-            child: Text('Hoodies', style: roboto16WhiteBold,),
+            child: Text(sl<Translator>().translate(TranslationCodes.HOODIES), style: roboto16WhiteBold,),
           ),
           FlatButton(
             onPressed: () => print('Stringers'),
-            child: Text('Stringers', style: roboto16WhiteBold,),
+            child: Text(sl<Translator>().translate(TranslationCodes.STRINGERS), style: roboto16WhiteBold,),
           ),
         ],
       );

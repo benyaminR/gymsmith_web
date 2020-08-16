@@ -15,6 +15,9 @@ class TranslationCodes {
   static const String SUM = 'sum';
   static const String REMOVE = 'remove';
   static const String YOUR_CART = 'yourCart';
+  static const String HOMEPAGE_BOTTOM_SLIDE_TEXT = 'homepageBottomSlidePage';
+  static const String DEALS_OF_THE_DAY = 'dealsOfTheDay';
+
 }
 //"add" : "Add",
 //"all" : "All",

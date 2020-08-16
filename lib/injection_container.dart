@@ -1,9 +1,10 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity/connectivity.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 import 'package:gymsmith_web/core/navigation/navigation_bloc.dart';
-import 'package:gymsmith_web/core/slideshow/slide_show/slide_show_bloc.dart';
+import 'package:gymsmith_web/core/utils/translation/languages.dart';
 import 'package:gymsmith_web/features/cart/data/datasources/cart_local_data_source.dart';
 import 'package:gymsmith_web/features/cart/data/repository/cart_repository_impl.dart';
 import 'package:gymsmith_web/features/cart/domain/repository/cart_repository.dart';
@@ -11,10 +12,6 @@ import 'package:gymsmith_web/features/cart/domain/usecases/add_to_cart_usecase.d
 import 'package:gymsmith_web/features/cart/domain/usecases/get_cart_usecase.dart';
 import 'package:gymsmith_web/features/cart/domain/usecases/remove_from_the_cart_usecase.dart';
 import 'package:gymsmith_web/features/cart/presentation/bloc/cart/cart_bloc.dart';
-import 'package:gymsmith_web/features/globalization/data/datasources/globalization_local_data_source.dart';
-import 'package:gymsmith_web/features/globalization/data/repositories/globalization_repository_impl.dart';
-import 'package:gymsmith_web/features/globalization/domain/repositories/globalizationRepository.dart';
-import 'package:gymsmith_web/features/globalization/presentation/globalization/globalization_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/networking/network_info.dart';
 import 'core/networking/network_info_impl.dart';
@@ -60,25 +57,16 @@ Future<void> init() async {
   sl.registerLazySingleton<CartRepository>(()=> CartRepositoryImpl(dataSource: sl()));
   sl.registerLazySingleton<CartLocalDataSource>(()=> CartLocalDataSourceImpl(sharedPreferences: sl()));
 
-  //Globalization
-  sl.registerLazySingleton(() => GlobalizationBloc(
-    InitialGlobalizationState(),
-    repository: sl()
-  ));
-
-  sl.registerLazySingleton<GlobalizationRepository>(() => GlobalizationRepositoryImp(
-    dataSource: sl()
-  ));
-  sl.registerLazySingleton<GlobalizationLocalDataSource>(() => GlobalizationLocalDataSourceImpl(
-    translator: sl()
-  ));
 
   // Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(connectivity: sl()));
 
   sl.registerLazySingleton(() => NavigationBloc(LoadingNavigationState()));
+  WidgetsFlutterBinding.ensureInitialized();
+  var translator = Translator();
+  await translator.init(Language.en);
+  sl.registerLazySingleton(() => translator);
 
-  sl.registerLazySingleton(() => Translator());
 
   //Externals
   sl.registerLazySingleton<Connectivity>(() => Connectivity());

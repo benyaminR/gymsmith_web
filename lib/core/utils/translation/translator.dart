@@ -5,19 +5,23 @@ import 'package:flutter/services.dart';
 import 'package:gymsmith_web/core/utils/translation/languages.dart';
 
 class Translator {
+  Map<String,String> translationJson;
 
-  Future<String> translate(String code,Language language) async {
-    var translationJson = await _getJsonForTranslationFile(language.toString());
-    return translationJson[language.toString()][code];
+  init(Language language) async{
+    translationJson = await _getJsonForTranslationFile(language.toString().substring((language.toString().length-2)));
   }
 
+
+  String translate(String code) => translationJson[code];
 
   Future<String> _getTranslationFileForLanguage(String language) async {
-    return await rootBundle.loadString('assets/languages/translations_$language');
+    return await rootBundle.loadString('assets/languages/$language.json');
   }
 
-  Future<Map<String,dynamic>> _getJsonForTranslationFile(String language) async {
+  Future<Map<String,String>> _getJsonForTranslationFile(String language) async {
     var source = await _getTranslationFileForLanguage(language);
-    return Future.value(json.decode(source));
+    Map<String,dynamic> rawMap = json.decode(source);
+    var converted = rawMap.map((key, value) => MapEntry(key, value.toString()));
+    return Future.value(converted);
   }
 }

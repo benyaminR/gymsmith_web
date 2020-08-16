@@ -3,6 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gymsmith_web/core/utils/TextStyles/text_styles.dart';
+import 'package:gymsmith_web/core/utils/translation/translation_codes.dart';
+import 'package:gymsmith_web/core/utils/translation/translator.dart';
+import 'package:gymsmith_web/injection_container.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:supercharged/supercharged.dart';
@@ -22,7 +25,7 @@ class _HomePageBottomSlideShowState extends State<HomePageBottomSlideShow> {
   Timer timer;
 
   int index = 0;
-  String topText = 'Steigere deine Leistung.';
+  String topText = sl<Translator>().translate(TranslationCodes.HOMEPAGE_BOTTOM_SLIDE_TEXT);
 
   List<Widget> slides = [
     Image.asset(

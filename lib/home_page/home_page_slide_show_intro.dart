@@ -1,6 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:gymsmith_web/core/utils/translation/translation_codes.dart';
+import 'package:gymsmith_web/core/utils/translation/translator.dart';
+import 'package:gymsmith_web/injection_container.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:supercharged/supercharged.dart';
@@ -113,7 +116,7 @@ class HomePageIntroSlide extends StatelessWidget{
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    'Finde deine passende Rüstung.',
+                    sl<Translator>().translate(TranslationCodes.HOMEPAGE_IMAGE_TEXT),
                     textAlign: TextAlign.center,
                     style: GoogleFonts.roboto(textStyle: TextStyle(
                         color: Colors.white,
