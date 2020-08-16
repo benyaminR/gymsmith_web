@@ -8,6 +8,8 @@ import 'package:gymsmith_web/core/utils/TextStyles/text_styles.dart';
 import 'package:gymsmith_web/features/cart/domain/entity/Cart.dart';
 import 'package:gymsmith_web/features/cart/presentation/bloc/cart/cart_bloc.dart';
 import 'package:gymsmith_web/features/deals_of_the_day_list/presenation/deals_of_the_day/deals_of_the_day_bloc.dart';
+import 'package:gymsmith_web/features/globalization/domain/repositories/globalizationRepository.dart';
+import 'package:gymsmith_web/features/globalization/presentation/globalization/globalization_bloc.dart';
 import 'package:gymsmith_web/home_page/home_page.dart';
 import 'package:gymsmith_web/injection_container.dart';
 import 'package:gymsmith_web/products_page/products_page.dart';
@@ -72,7 +74,7 @@ class CommonAppBar extends StatelessWidget {
                 widget: ProductsPage(
                   event: GetDealsOfTheDay(),
                   imagePath: 'assets/images/Preview_02.png',
-                  imageText:'Alles, was man braucht, findest du bei hier.' ,
+                  imageText:'Alles, was man braucht, findest du bei uns.' ,
                   titleText: 'Alle',
                 )
             )

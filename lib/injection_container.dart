@@ -11,9 +11,14 @@ import 'package:gymsmith_web/features/cart/domain/usecases/add_to_cart_usecase.d
 import 'package:gymsmith_web/features/cart/domain/usecases/get_cart_usecase.dart';
 import 'package:gymsmith_web/features/cart/domain/usecases/remove_from_the_cart_usecase.dart';
 import 'package:gymsmith_web/features/cart/presentation/bloc/cart/cart_bloc.dart';
+import 'package:gymsmith_web/features/globalization/data/datasources/globalization_local_data_source.dart';
+import 'package:gymsmith_web/features/globalization/data/repositories/globalization_repository_impl.dart';
+import 'package:gymsmith_web/features/globalization/domain/repositories/globalizationRepository.dart';
+import 'package:gymsmith_web/features/globalization/presentation/globalization/globalization_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/networking/network_info.dart';
 import 'core/networking/network_info_impl.dart';
+import 'core/utils/translation/translator.dart';
 import 'features/deals_of_the_day_list/data/datasources/items_remote_datasource.dart';
 import 'features/deals_of_the_day_list/data/respositories/items_repository_implementation.dart';
 import 'features/deals_of_the_day_list/domain/repositories/items_repository.dart';
@@ -55,12 +60,25 @@ Future<void> init() async {
   sl.registerLazySingleton<CartRepository>(()=> CartRepositoryImpl(dataSource: sl()));
   sl.registerLazySingleton<CartLocalDataSource>(()=> CartLocalDataSourceImpl(sharedPreferences: sl()));
 
+  //Globalization
+  sl.registerLazySingleton(() => GlobalizationBloc(
+    InitialGlobalizationState(),
+    repository: sl()
+  ));
 
+  sl.registerLazySingleton<GlobalizationRepository>(() => GlobalizationRepositoryImp(
+    dataSource: sl()
+  ));
+  sl.registerLazySingleton<GlobalizationLocalDataSource>(() => GlobalizationLocalDataSourceImpl(
+    translator: sl()
+  ));
 
   // Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(connectivity: sl()));
 
   sl.registerLazySingleton(() => NavigationBloc(LoadingNavigationState()));
+
+  sl.registerLazySingleton(() => Translator());
 
   //Externals
   sl.registerLazySingleton<Connectivity>(() => Connectivity());
