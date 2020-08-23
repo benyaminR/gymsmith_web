@@ -24,14 +24,14 @@ void main(){
       () async{
 
         //arrange
-        when(repository.getItems()).thenAnswer((_) async => Right(items));
+        when(repository.getDealsOfTheDay()).thenAnswer((_) async => Right(items));
 
         //act
         final result = await getDealsOfTheDayUsecase(NoParams());
 
         //assert
         expect(result, Right(items));
-        verify(repository.getItems());
+        verify(repository.getDealsOfTheDay());
         verifyNoMoreInteractions(repository);
     }
   );

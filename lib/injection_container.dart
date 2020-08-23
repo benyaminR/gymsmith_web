@@ -43,7 +43,7 @@ Future<void> init() async {
 
   sl.registerLazySingleton<ProductsRepository>(() => ProductsRepositoryImplementation(
       networkInfo: sl(),
-      itemsRemoteDataSource: sl()
+      datasource: sl()
   ));
 
   sl.registerLazySingleton<ProductsRemoteDataSource>(() =>ProductsRemoteDataSourceImpl(firestore: sl()));

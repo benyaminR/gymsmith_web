@@ -3,8 +3,11 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:gymsmith_web/core/error/failure.dart';
 import 'package:gymsmith_web/core/usecase/no_params.dart';
+import 'package:gymsmith_web/core/usecase/params.dart';
+import 'package:gymsmith_web/features/products/domain/entities/product.dart';
 import 'package:gymsmith_web/features/products/domain/entities/products.dart';
 import 'package:gymsmith_web/features/products/domain/usecases/get_deals_of_the_day_usecase.dart';
+import 'package:gymsmith_web/features/products/domain/usecases/get_product_usecase.dart';
 import 'package:meta/meta.dart';
 
 
@@ -18,8 +21,9 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   static const String Offline_Failure = 'Offline Failure';
 
   final GetDealsOfTheDayUsecase getDealsOfTheDayUsecase;
+  final GetProductUseCase getProductUseCase;
 
-  ProductsBloc(ProductsState initialState, {@required this.getDealsOfTheDayUsecase}) : super(initialState);
+  ProductsBloc(ProductsState initialState, {@required this.getDealsOfTheDayUsecase, @required this.getProductUseCase}) : super(initialState);
 
   ProductsState get initialState => InitialDealsOfTheDayState();
 
@@ -31,7 +35,16 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
       final failureOrItems = await getDealsOfTheDayUsecase(NoParams());
       yield failureOrItems.fold(
               (l) => _showErrorState(l),
-              (r)  => Loaded(items: r)
+              (r)  => LoadedDealsOfTheDay(products: r)
+      );
+    }
+    if(event is GetProductEvent){
+      var documentRef = event.documentRef;
+      yield Loading();
+      final failureOrProduct = await getProductUseCase(WithParams(param: documentRef));
+      yield failureOrProduct.fold(
+              (l) => _showErrorState(l),
+              (r) => LoadedProduct(product: r)
       );
     }
   }

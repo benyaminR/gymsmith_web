@@ -26,8 +26,8 @@ class ProductsPage extends StatelessWidget{
       create: (context) => sl<ProductsBloc>()..add(event),
       child: BlocBuilder<ProductsBloc,ProductsState>(
         builder: (context, state){
-          if(state is Loaded)
-            return _getBody(state.items);
+          if(state is LoadedDealsOfTheDay)
+            return _getBody(state.products);
           return Container(height: 1500,);
         },
       ),

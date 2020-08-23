@@ -29,15 +29,15 @@ class DealsOfTheDayWidget extends StatelessWidget {
       return Container();
     }else if(state is Loading){
       return CircularProgressIndicator();
-    }else if(state is Loaded){
+    }else if(state is LoadedDealsOfTheDay){
       return SizedBox(
         width: MediaQuery.of(context).size.width,
         height: 450,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
-            itemCount: state.items.items.length,
+            itemCount: state.products.items.length,
             itemBuilder:(context, index) {
-              final item = state.items.items[index];
+              final item = state.products.items[index];
               return ProductCardUi(item: item,);
             },
         ),

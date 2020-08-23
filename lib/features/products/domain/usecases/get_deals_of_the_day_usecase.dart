@@ -15,7 +15,7 @@ class GetDealsOfTheDayUsecase implements UseCase<Products,NoParams>{
 
   @override
   Future<Either<Failure,Products>> call(NoParams noParams) async{
-    return await repository.getItems();
+    return await repository.getDealsOfTheDay();
   }
 
 }

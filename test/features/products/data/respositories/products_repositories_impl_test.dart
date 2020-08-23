@@ -6,6 +6,7 @@ import 'package:gymsmith_web/core/error/exception.dart';
 import 'package:gymsmith_web/core/error/failure.dart';
 import 'package:gymsmith_web/core/networking/network_info.dart';
 import 'package:gymsmith_web/features/products/data/datasources/products_remote_datasource.dart';
+import 'package:gymsmith_web/features/products/data/models/product_model.dart';
 import 'package:gymsmith_web/features/products/data/models/products_model.dart';
 import 'package:gymsmith_web/features/products/data/respositories/products_repository_implementation.dart';
 import 'package:mockito/mockito.dart';
@@ -23,7 +24,7 @@ void main(){
     mockItemsRemoteDataSource = MockItemsRemoteDataSource();
     mockNetworkInfo = MockNetworkInfo();
     itemsRepositoryImplementation = ProductsRepositoryImplementation(
-        itemsRemoteDataSource:mockItemsRemoteDataSource,
+        datasource:mockItemsRemoteDataSource,
         networkInfo:mockNetworkInfo
     );
   });
@@ -37,7 +38,7 @@ void main(){
       when(mockNetworkInfo.isConnected()).thenAnswer((_) async => true);
 
       //act
-      itemsRepositoryImplementation.getItems();
+      itemsRepositoryImplementation.getDealsOfTheDay();
 
       //assert
       verify(mockNetworkInfo.isConnected());
@@ -50,12 +51,12 @@ void main(){
       test('should return a valid Items entity when the call to itemsRepositoryImplementation is success', () async {
 
         //arrange
-        when(mockItemsRemoteDataSource.getProducts()).thenAnswer((_) async => itemsModel);
+        when(mockItemsRemoteDataSource.getDealsOfTheDay()).thenAnswer((_) async => itemsModel);
         //act
-        final result = await itemsRepositoryImplementation.getItems();
+        final result = await itemsRepositoryImplementation.getDealsOfTheDay();
 
         //assert
-        verify(mockItemsRemoteDataSource.getProducts());
+        verify(mockItemsRemoteDataSource.getDealsOfTheDay());
         expect(result, Right(itemsModel));
 
       });
@@ -63,12 +64,12 @@ void main(){
       test('should return Failure when the call to itemsRepositoryImplementation is unsucceseful', () async {
 
         //arrange
-        when(mockItemsRemoteDataSource.getProducts()).thenThrow(ServerException());
+        when(mockItemsRemoteDataSource.getDealsOfTheDay()).thenThrow(ServerException());
         //act
-        final result = await itemsRepositoryImplementation.getItems();
+        final result = await itemsRepositoryImplementation.getDealsOfTheDay();
 
         //assert
-        verify(mockItemsRemoteDataSource.getProducts());
+        verify(mockItemsRemoteDataSource.getDealsOfTheDay());
         expect(result, Left(ServerFailure()));
 
       });
@@ -81,11 +82,39 @@ void main(){
 
       test('should return OfflineFailure when the call to Repository is a success', () async{
         //act
-        final result = await itemsRepositoryImplementation.getItems();
+        final result = await itemsRepositoryImplementation.getDealsOfTheDay();
         //assert
         expect(result, Left(OfflineFailure()));
       });
 
+    });
+
+  });
+
+
+  group('GetProduct ', (){
+    final documentRef = 'path';
+    final productModel = ProductModel();
+    test('should return Product', () async{
+      //arrange
+      when(mockItemsRemoteDataSource.getProduct(documentRef)).thenAnswer((_) async => productModel);
+      //act
+      var actual = await itemsRepositoryImplementation.getProduct(documentRef);
+      //assert
+      expect(actual, Right(productModel));
+      verify(mockItemsRemoteDataSource.getProduct(documentRef));
+      verifyNoMoreInteractions(mockItemsRemoteDataSource);
+    });
+
+    test('should deal with serverException', () async {
+      //arrange
+      when(mockItemsRemoteDataSource.getProduct(documentRef)).thenThrow(ServerException());
+      //act
+      final result = await itemsRepositoryImplementation.getProduct(documentRef);
+      //assert
+      expect(result, Left(ServerFailure()));
+      verify(mockItemsRemoteDataSource.getProduct(documentRef));
+      verifyNoMoreInteractions(mockItemsRemoteDataSource);
     });
 
   });
