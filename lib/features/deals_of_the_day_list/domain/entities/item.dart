@@ -10,6 +10,7 @@ class Item extends Equatable{
   final bool isAvailable;
   final List<dynamic> colors;
   final List<dynamic> sizes;
+  final String databaseRef;
 
   Item({
     @required this.description,
@@ -19,10 +20,11 @@ class Item extends Equatable{
     @required this.isAvailable,
     @required this.isNew,
     @required this.colors,
-    @required this.sizes
+    @required this.sizes,
+    @required this.databaseRef
   });
 
   @override
-  List<Object> get props => [description,name,price,isNew,colors,sizes];
+  List<Object> get props => [description,name,price,isNew,colors,sizes,databaseRef];
 
 }

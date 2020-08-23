@@ -17,8 +17,14 @@ void main(){
 
   final cartRepository  = MockCartRepository();
   final addToCartUseCase = AddToCartUseCase(repository:cartRepository);
-  final item = 'itemDatabasePath';
+  final item = CartItemData(
+    size: 'M',
+    databaseRef: 'ref',
+    amount: 20,
+    color: 'red',
+  );
   final cart = Cart();
+
   test('should add an item successfully to the cart', () async {
     //arrange
     when(cartRepository.add(item)).thenAnswer((_) async => Right(cart));
@@ -30,4 +36,6 @@ void main(){
     verifyNoMoreInteractions(cartRepository);
   });
 
+  //TODO should increase amount not create a new item
+  //TODO should create a new item not increase amount
 }

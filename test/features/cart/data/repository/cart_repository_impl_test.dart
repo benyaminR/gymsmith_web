@@ -3,7 +3,6 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gymsmith_web/core/error/exception.dart';
 import 'package:gymsmith_web/core/error/failure.dart';
-import 'package:gymsmith_web/features/cart/data/datasources/cart_local_data_source.dart';
 import 'package:gymsmith_web/features/cart/data/datasources/cart_remote_data_source.dart';
 import 'package:gymsmith_web/features/cart/data/model/cart_model.dart';
 import 'package:gymsmith_web/features/cart/data/repository/cart_repository_impl.dart';
@@ -16,7 +15,12 @@ void main() {
   final dataSource = MockCartRemoteDataSource();
   final repo = CartRepositoryImpl(dataSource: dataSource);
 
-  final cartItem = 'itemPath';
+  final cartItem = CartItemData(
+    color: 'Red',
+    amount: 10,
+    databaseRef: 'ref' ,
+    size: 'M'
+  );
   final cart = CartModel();
 
   group('Repository ', () {
@@ -56,18 +60,6 @@ void main() {
         expect(res, Left(ServerFailure()));
       });
 
-      test('should get successfully', () async{
-        //arrange
-        final itemsList = ['item1','items2'];
-        final cartModel = CartModel.fromSnapshot(itemsList);
-        when(dataSource.get()).thenAnswer((_) async => cartModel);
-        var expected = await dataSource.get();
-        //act
-        var res = await repo.get();
-        //assert
-        verify(dataSource.get());
-        expect(res, Right(expected));
-      });
     });
 
   });

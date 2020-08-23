@@ -3,11 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gymsmith_web/features/cart/data/model/cart_model.dart';
+import 'package:gymsmith_web/features/cart/domain/entity/Cart.dart';
 
 abstract class CartRemoteDataSource{
   Future<CartModel> get();
-  Future<CartModel> add(String item);
-  Future<CartModel> remove(String item);
+  Future<CartModel> add(CartItemData item);
+  Future<CartModel> remove(CartItemData item);
 }
 class CartRemoteDataSourceImpl implements CartRemoteDataSource{
   final Firestore firestore;
@@ -16,7 +17,7 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource{
 
   //TODO Check whether the user is SignedIn and
   @override
-  Future<CartModel> add(String item) async {
+  Future<CartModel> add(CartItemData item) async {
     //current user
     var user = (await firebaseAuth.currentUser()).uid;
     //add an auto generate item document to cart
@@ -25,7 +26,10 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource{
         .document(user)
         .collection('cart')
         .add({
-      'item' : item
+      'databaseRef':item.databaseRef,
+      'size': item.size,
+      'amount' : item.amount,
+      'color' : item.color
     });
     return get();
   }
@@ -42,7 +46,7 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource{
   }
 
   @override
-  Future<CartModel> remove(String item) async {
+  Future<CartModel> remove(CartItemData item) async {
     var user = (await firebaseAuth.currentUser()).uid;
 
     var snapshot = await firestore

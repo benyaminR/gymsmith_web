@@ -24,7 +24,12 @@ void main() {
   final cartBloc = CartBloc(initialState: InitialCartState(),addToCartUseCase: addUsecase,getCartUseCase: getUseCase,removeFromCartUseCase: removeUsecase);
 
   group('CartBloc',(){
-    final item = 'item';
+    final item = CartItemData(
+      size: 'M',
+      databaseRef: 'ref',
+      amount: 23,
+      color: 'Red'
+    );
     final cart = Cart();
 
     group('Remove',(){
@@ -76,8 +81,12 @@ void main() {
       test('should return updated Cart back', () async {
 
         //arrange
-        final item = 'item';
-        when(addUsecase(WithParams(param: item))).thenAnswer((_) async => Right(cart));
+        final item = CartItemData(
+            size: 'M',
+            databaseRef: 'ref',
+            amount: 23,
+            color: 'Red'
+        );        when(addUsecase(WithParams(param: item))).thenAnswer((_) async => Right(cart));
 
         //act
         cartBloc.add(AddItemToCartEvent(item: item));
@@ -90,8 +99,12 @@ void main() {
 
       test('Should handle Error', () async {
         //arrange
-        final item = 'item';
-        when(addUsecase(WithParams(param: item))).thenAnswer((_) async => Left(ServerFailure()));
+        final item = CartItemData(
+            size: 'M',
+            databaseRef: 'ref',
+            amount: 23,
+            color: 'Red'
+        );        when(addUsecase(WithParams(param: item))).thenAnswer((_) async => Left(ServerFailure()));
         cartBloc.add(AddItemToCartEvent(item: item));
 
         //act

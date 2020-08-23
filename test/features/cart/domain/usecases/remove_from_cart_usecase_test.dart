@@ -14,8 +14,13 @@ class MockCartRepository extends Mock implements CartRepository{}
 void main(){
 
   final cartRepository  = MockCartRepository();
-  final removeFromCart = RemoveFromCartUseCase(repository:cartRepository);
-  final item = 'itemDatabasePath';
+  final removeFromCart = RemoveFromCartUseCase(repository : cartRepository);
+  final item = CartItemData(
+    size: 'M',
+    databaseRef: 'ref',
+    amount: 20,
+    color: 'red',
+  );
 
   final cart = Cart();
 
@@ -29,5 +34,8 @@ void main(){
     expect(result, Right(cart));
     verifyNoMoreInteractions(cartRepository);
   });
+
+  //TODO should decrement amount
+  //TODO should completely remove item when amount is =< 1
 
 }

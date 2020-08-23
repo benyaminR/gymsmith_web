@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gymsmith_web/core/custom_icons/custom_icons_icons.dart';
 import 'package:gymsmith_web/core/utils/TextStyles/text_styles.dart';
+import 'package:gymsmith_web/features/cart/domain/entity/Cart.dart';
 import 'package:gymsmith_web/features/cart/presentation/bloc/cart/cart_bloc.dart';
 import 'package:gymsmith_web/features/deals_of_the_day_list/domain/entities/item.dart';
 
@@ -61,7 +62,7 @@ class ProductCardUi extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.only(top: 16),
                           child: GestureDetector(
-                            onTap: ()=> sl<CartBloc>().add(AddItemToCartEvent(item: item.name)),
+                            onTap: ()=> sl<CartBloc>().add(AddItemToCartEvent(item: CartItemData.fromItem(item))),
                             child: Icon(CustomIcons.cart,size: 40,),
                           ),
                         ),

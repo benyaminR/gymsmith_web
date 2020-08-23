@@ -8,7 +8,7 @@ class GetCartEvent extends CartEvent{
 }
 
 class RemoveItemFromCartEvent extends CartEvent{
-  final String item;
+  final CartItemData item;
 
   RemoveItemFromCartEvent({@required this.item});
   @override
@@ -16,7 +16,7 @@ class RemoveItemFromCartEvent extends CartEvent{
 }
 
 class AddItemToCartEvent extends CartEvent{
-  final String item;
+  final CartItemData item;
 
   AddItemToCartEvent({@required this.item});
 

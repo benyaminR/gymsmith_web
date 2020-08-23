@@ -10,7 +10,6 @@ import 'package:gymsmith_web/features/authentication/data/repository/auth_repo_i
 import 'package:gymsmith_web/features/authentication/domain/repository/auth_repo.dart';
 import 'package:gymsmith_web/features/authentication/domain/usecase/sign_in_anonymously_usecase.dart';
 import 'package:gymsmith_web/features/authentication/presentation/auth/auth_bloc.dart';
-import 'package:gymsmith_web/features/cart/data/datasources/cart_local_data_source.dart';
 import 'package:gymsmith_web/features/cart/data/datasources/cart_remote_data_source.dart';
 import 'package:gymsmith_web/features/cart/data/repository/cart_repository_impl.dart';
 import 'package:gymsmith_web/features/cart/domain/repository/cart_repository.dart';
@@ -61,7 +60,6 @@ Future<void> init() async {
   sl.registerLazySingleton(()=> GetCartUseCase(repository: sl()));
 
   sl.registerLazySingleton<CartRepository>(()=> CartRepositoryImpl(dataSource: sl()));
-  sl.registerLazySingleton<CartLocalDataSource>(()=> CartLocalDataSourceImpl(sharedPreferences: sl()));
   sl.registerLazySingleton<CartRemoteDataSource>(() => CartRemoteDataSourceImpl(firebaseAuth: sl(),firestore: sl()));
 
   //Auth

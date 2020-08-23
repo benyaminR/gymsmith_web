@@ -21,6 +21,7 @@ class ItemsModel extends Items implements Equatable{
        name: element.data['name'],
        price: element.data['price'],
        sizes:element.data['sizes'] ,
+       databaseRef: element.reference.path
       ));
      });
      return ItemsModel(items: items);

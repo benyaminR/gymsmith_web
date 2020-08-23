@@ -6,16 +6,12 @@ import 'package:flutter/foundation.dart';
 import 'package:gymsmith_web/features/cart/domain/entity/Cart.dart';
 
 class CartModel extends Cart implements Equatable{
-  final List<String> items;
+  final List<CartItemData> items;
   CartModel({@required this.items}) : super(items:items);
 
-  factory CartModel.fromSnapshot(List<String> snapshot){
-    return CartModel(items: snapshot);
-  }
-
   factory CartModel.fromQuerySnapshot(QuerySnapshot snapshot){
-    List<String> items = [];
-    snapshot.documents.forEach((element) => items.add(element['item'].toString()));
+    List<CartItemData> items = [];
+    snapshot.documents.forEach((element) => items.add(CartItemData.fromSnapshot(element)));
     return CartModel(items: items);
   }
 }
