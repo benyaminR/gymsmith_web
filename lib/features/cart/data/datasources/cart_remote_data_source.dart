@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gymsmith_web/features/cart/data/model/cart_model.dart';
 import 'package:gymsmith_web/features/cart/domain/entity/Cart.dart';
+import 'package:mockito/mockito.dart';
 
 abstract class CartRemoteDataSource{
   Future<CartModel> get();
@@ -15,22 +16,44 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource{
   final FirebaseAuth firebaseAuth;
   CartRemoteDataSourceImpl({@required this.firebaseAuth,@required this.firestore});
 
-  //TODO Check whether the user is SignedIn and
   @override
   Future<CartModel> add(CartItemData item) async {
     //current user
     var user = (await firebaseAuth.currentUser()).uid;
+    print(user);
     //add an auto generate item document to cart
-    await firestore.
-    collection('users')
+    var currentItem = (await firestore.
+        collection('users')
         .document(user)
         .collection('cart')
-        .add({
-      'databaseRef':item.databaseRef,
-      'size': item.size,
-      'amount' : item.amount,
-      'color' : item.color
-    });
+        .where('databaseRef',isEqualTo: item.databaseRef)
+        .where('size',isEqualTo: item.size)
+        .where('amount',isEqualTo: item.amount)
+        .where('color',isEqualTo: item.color)
+        .getDocuments());
+    var exists = currentItem.documents.length >= 1;
+
+    if(!exists) {
+      await firestore.
+      collection('users')
+          .document(user)
+          .collection('cart')
+          .add({
+        'databaseRef': item.databaseRef,
+        'size': item.size,
+        'amount': item.amount,
+        'color': item.color
+      });
+    }else{
+      int currentAmount = currentItem.documents[0].data['amount'];
+      currentAmount++;
+      await firestore.document(currentItem.documents[0].reference.path).updateData({
+        'databaseRef': item.databaseRef,
+        'size': item.size,
+        'amount': currentAmount,
+        'color': item.color
+      });
+    }
     return get();
   }
 
