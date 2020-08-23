@@ -165,7 +165,10 @@ class CartItemCardUI extends StatelessWidget{
                                                   decoration: BoxDecoration(
                                                       border: Border.all(color: Black,width: 0.5)
                                                   ),
-                                                  child: Icon(Icons.remove,size: 16),
+                                                  child: GestureDetector(
+                                                    child: Icon(Icons.remove,size: 16),
+                                                    onTap: ()=> print('decrease'),
+                                                  ),
                                                 ),
                                                 Container(
                                                   alignment: Alignment.center,
@@ -183,7 +186,10 @@ class CartItemCardUI extends StatelessWidget{
                                                   decoration: BoxDecoration(
                                                       border: Border.all(color: Black,width: 0.5)
                                                   ),
-                                                  child: Icon(Icons.add,size: 16,),
+                                                  child: GestureDetector(
+                                                    child: Icon(Icons.add,size: 16,),
+                                                    onTap: ()=> sl<CartBloc>().add(AddItemToCartEvent(item: cartItemData)),
+                                                  ),
                                                 )
                                               ],
                                             ),
