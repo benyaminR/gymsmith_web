@@ -21,11 +21,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'core/networking/network_info.dart';
 import 'core/networking/network_info_impl.dart';
 import 'core/utils/translation/translator.dart';
-import 'features/deals_of_the_day_list/data/datasources/items_remote_datasource.dart';
-import 'features/deals_of_the_day_list/data/respositories/items_repository_implementation.dart';
-import 'features/deals_of_the_day_list/domain/repositories/items_repository.dart';
-import 'features/deals_of_the_day_list/domain/usecases/get_deals_of_the_day_usecase.dart';
-import 'features/deals_of_the_day_list/presenation/deals_of_the_day/deals_of_the_day_bloc.dart';
+import 'features/products/data/datasources/products_remote_datasource.dart';
+import 'features/products/data/respositories/products_repository_implementation.dart';
+import 'features/products/domain/repositories/products_repository.dart';
+import 'features/products/domain/usecases/get_deals_of_the_day_usecase.dart';
+import 'features/products/presenation/deals_of_the_day/products_bloc.dart';
+
 
 
 
@@ -36,16 +37,16 @@ Future<void> init() async {
   //Features
 
   //deals of the day
-  sl.registerFactory(() => DealsOfTheDayBloc(InitialDealsOfTheDayState(),getDealsOfTheDayUsecase: sl()));
+  sl.registerFactory(() => ProductsBloc(InitialDealsOfTheDayState(),getDealsOfTheDayUsecase: sl()));
   //domain
   sl.registerLazySingleton(() => GetDealsOfTheDayUsecase(repository: sl()));
 
-  sl.registerLazySingleton<ItemsRepository>(() => ItemsRepositoryImplementation(
+  sl.registerLazySingleton<ProductsRepository>(() => ProductsRepositoryImplementation(
       networkInfo: sl(),
       itemsRemoteDataSource: sl()
   ));
 
-  sl.registerLazySingleton<ItemsRemoteDataSource>(() =>ItemsRemoteDataSourceImpl(firestore: sl()));
+  sl.registerLazySingleton<ProductsRemoteDataSource>(() =>ProductsRemoteDataSourceImpl(firestore: sl()));
 
   //cart
   sl.registerLazySingleton(() => CartBloc(

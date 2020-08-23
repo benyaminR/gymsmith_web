@@ -6,14 +6,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:gymsmith_web/core/common_widgets/product_card_ui.dart';
 import 'package:gymsmith_web/core/common_widgets/title_bar.dart';
 import 'package:gymsmith_web/core/utils/Colors/color_swatches.dart';
-import 'package:gymsmith_web/features/deals_of_the_day_list/domain/entities/items.dart';
-import 'package:gymsmith_web/features/deals_of_the_day_list/presenation/deals_of_the_day/deals_of_the_day_bloc.dart';
+import 'package:gymsmith_web/features/products/domain/entities/products.dart';
+import 'package:gymsmith_web/features/products/presenation/deals_of_the_day/products_bloc.dart';
 import 'package:gymsmith_web/injection_container.dart';
 
 class ProductsPage extends StatelessWidget{
 
   
-  final DealsOfTheDayEvent event;
+  final ProductsEvent event;
   final String imageText;
   final String imagePath;
   final String titleText;
@@ -22,9 +22,9 @@ class ProductsPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<DealsOfTheDayBloc>(
-      create: (context) => sl<DealsOfTheDayBloc>()..add(event),
-      child: BlocBuilder<DealsOfTheDayBloc,DealsOfTheDayState>(
+    return BlocProvider<ProductsBloc>(
+      create: (context) => sl<ProductsBloc>()..add(event),
+      child: BlocBuilder<ProductsBloc,ProductsState>(
         builder: (context, state){
           if(state is Loaded)
             return _getBody(state.items);
@@ -34,7 +34,7 @@ class ProductsPage extends StatelessWidget{
     );
   }
 
-  Widget _getBody(Items items){
+  Widget _getBody(Products items){
     return Column(
       children: [
         SizedBox(height: 38,),

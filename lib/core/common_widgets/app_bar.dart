@@ -9,7 +9,7 @@ import 'package:gymsmith_web/core/utils/translation/translation_codes.dart';
 import 'package:gymsmith_web/core/utils/translation/translator.dart';
 import 'package:gymsmith_web/features/cart/domain/entity/Cart.dart';
 import 'package:gymsmith_web/features/cart/presentation/bloc/cart/cart_bloc.dart';
-import 'package:gymsmith_web/features/deals_of_the_day_list/presenation/deals_of_the_day/deals_of_the_day_bloc.dart';
+import 'package:gymsmith_web/features/products/presenation/deals_of_the_day/products_bloc.dart';
 import 'package:gymsmith_web/home_page/home_page.dart';
 import 'package:gymsmith_web/injection_container.dart';
 import 'package:gymsmith_web/products_page/products_page.dart';
@@ -72,7 +72,7 @@ class CommonAppBar extends StatelessWidget {
           FlatButton(
             onPressed: () => sl<NavigationBloc>().add(ChangePageEvent(
                 widget: ProductsPage(
-                  event: GetDealsOfTheDay(),
+                  event: GetDealsOfTheDayEvent(),
                   imagePath: 'assets/images/Preview_02.png',
                   imageText: sl<Translator>().translate(TranslationCodes.HOMEPAGE_IMAGE_TEXT) ,
                   titleText: sl<Translator>().translate(TranslationCodes.ALL),

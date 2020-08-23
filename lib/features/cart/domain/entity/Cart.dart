@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:gymsmith_web/features/deals_of_the_day_list/domain/entities/item.dart';
+import 'package:gymsmith_web/features/products/domain/entities/product.dart';
 
 class Cart extends Equatable{
 
@@ -34,7 +34,7 @@ class CartItemData extends Equatable{
     );
   }
 
-  factory CartItemData.fromItem(Item item){
+  factory CartItemData.fromItem(Product item){
     return CartItemData(
       color: item.colors[0],
       amount: 1,

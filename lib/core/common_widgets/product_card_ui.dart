@@ -3,12 +3,12 @@ import 'package:gymsmith_web/core/custom_icons/custom_icons_icons.dart';
 import 'package:gymsmith_web/core/utils/TextStyles/text_styles.dart';
 import 'package:gymsmith_web/features/cart/domain/entity/Cart.dart';
 import 'package:gymsmith_web/features/cart/presentation/bloc/cart/cart_bloc.dart';
-import 'package:gymsmith_web/features/deals_of_the_day_list/domain/entities/item.dart';
+import 'package:gymsmith_web/features/products/domain/entities/product.dart';
 
 import '../../injection_container.dart';
 
 class ProductCardUi extends StatelessWidget {
-  final Item item;
+  final Product item;
 
   const ProductCardUi({Key key, @required this.item}) : super(key: key);
 
