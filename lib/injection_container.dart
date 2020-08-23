@@ -17,6 +17,7 @@ import 'package:gymsmith_web/features/cart/domain/usecases/add_to_cart_usecase.d
 import 'package:gymsmith_web/features/cart/domain/usecases/get_cart_usecase.dart';
 import 'package:gymsmith_web/features/cart/domain/usecases/remove_from_the_cart_usecase.dart';
 import 'package:gymsmith_web/features/cart/presentation/bloc/cart/cart_bloc.dart';
+import 'package:gymsmith_web/features/products/domain/usecases/get_product_usecase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/networking/network_info.dart';
 import 'core/networking/network_info_impl.dart';
@@ -37,9 +38,10 @@ Future<void> init() async {
   //Features
 
   //deals of the day
-  sl.registerFactory(() => ProductsBloc(InitialDealsOfTheDayState(),getDealsOfTheDayUsecase: sl()));
+  sl.registerFactory(() => ProductsBloc(InitialDealsOfTheDayState(),getDealsOfTheDayUsecase: sl(),getProductUseCase: sl()));
   //domain
   sl.registerLazySingleton(() => GetDealsOfTheDayUsecase(repository: sl()));
+  sl.registerLazySingleton(() => GetProductUseCase(repo: sl()));
 
   sl.registerLazySingleton<ProductsRepository>(() => ProductsRepositoryImplementation(
       networkInfo: sl(),
