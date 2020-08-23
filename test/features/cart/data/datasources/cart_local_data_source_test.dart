@@ -7,7 +7,6 @@ import 'package:gymsmith_web/features/cart/domain/entity/Cart.dart';
 import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class MockSharedPreferences extends Mock implements SharedPreferences{}
 void main() {
   final sharedPreferences = MockSharedPreferences();

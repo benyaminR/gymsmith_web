@@ -4,19 +4,20 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:gymsmith_web/core/error/exception.dart';
 import 'package:gymsmith_web/core/error/failure.dart';
 import 'package:gymsmith_web/features/cart/data/datasources/cart_local_data_source.dart';
+import 'package:gymsmith_web/features/cart/data/datasources/cart_remote_data_source.dart';
 import 'package:gymsmith_web/features/cart/data/model/cart_model.dart';
 import 'package:gymsmith_web/features/cart/data/repository/cart_repository_impl.dart';
 import 'package:gymsmith_web/features/cart/domain/entity/Cart.dart';
 import 'package:mockito/mockito.dart';
 
-class MockCartLocalDataSource extends Mock implements CartLocalDataSource{}
+class MockCartRemoteDataSource extends Mock implements CartRemoteDataSource{}
 
 void main() {
-  final dataSource = MockCartLocalDataSource();
+  final dataSource = MockCartRemoteDataSource();
   final repo = CartRepositoryImpl(dataSource: dataSource);
 
   final cartItem = 'itemPath';
-  final cart = Cart();
+  final cart = CartModel();
 
   group('Repository ', () {
 

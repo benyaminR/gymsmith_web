@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gymsmith_web/core/debugging/data_pumper.dart';
+import 'package:gymsmith_web/features/authentication/presentation/auth/auth_bloc.dart';
 import 'package:gymsmith_web/home/home.dart';
 import 'core/utils/Colors/color_swatches.dart';
 import 'package:gymsmith_web/injection_container.dart';
@@ -25,7 +27,20 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
-      routes: {'/': (BuildContext buildContext)=>Home(),},
+      routes: {'/': (BuildContext buildContext)=> BlocProvider<AuthBloc>(
+        create: (context) => sl<AuthBloc>()..add(SignInAnonymouslyEvent()),
+        child: BlocBuilder<AuthBloc,AuthState>(
+          builder: (context, state) {
+            if(state is AuthenticatingState)
+              return Center(child: CircularProgressIndicator());
+            if(state is AuthenticatedState)
+              return Home();
+            if(state is AuthenticationFailedState)
+              return Center(child: Text('Something went wrong :('));
+            return Container();
+          },
+        ),
+      ),}
     );
   }
 }

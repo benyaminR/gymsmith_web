@@ -3,12 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:gymsmith_web/core/error/exception.dart';
 import 'package:gymsmith_web/core/error/failure.dart';
 import 'package:gymsmith_web/features/cart/data/datasources/cart_local_data_source.dart';
+import 'package:gymsmith_web/features/cart/data/datasources/cart_remote_data_source.dart';
 import 'package:gymsmith_web/features/cart/domain/entity/Cart.dart';
 import 'package:gymsmith_web/features/cart/domain/repository/cart_repository.dart';
 
 class CartRepositoryImpl implements CartRepository{
 
-  final CartLocalDataSource dataSource;
+  final CartRemoteDataSource dataSource;
 
   CartRepositoryImpl({@required this.dataSource});
 

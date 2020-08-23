@@ -4,6 +4,7 @@ import 'package:gymsmith_web/features/cart/data/model/cart_model.dart';
 import 'package:gymsmith_web/features/cart/domain/entity/Cart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+@deprecated
 abstract class CartLocalDataSource{
   final SharedPreferences sharedPreferences;
 
@@ -14,6 +15,7 @@ abstract class CartLocalDataSource{
   Future<Cart> remove(String item);
 }
 
+@deprecated
 class CartLocalDataSourceImpl extends CartLocalDataSource{
 
   final SharedPreferences sharedPreferences;
