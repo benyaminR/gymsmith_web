@@ -28,7 +28,6 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource{
         .collection('cart')
         .where('databaseRef',isEqualTo: item.databaseRef)
         .where('size',isEqualTo: item.size)
-        .where('amount',isEqualTo: item.amount)
         .where('color',isEqualTo: item.color)
         .getDocuments());
     var exists = currentItem.documents.length >= 1;
@@ -48,10 +47,7 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource{
       int currentAmount = currentItem.documents[0].data['amount'];
       currentAmount++;
       await firestore.document(currentItem.documents[0].reference.path).updateData({
-        'databaseRef': item.databaseRef,
-        'size': item.size,
         'amount': currentAmount,
-        'color': item.color
       });
     }
     return get();
@@ -71,26 +67,26 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource{
   @override
   Future<CartModel> remove(CartItemData item) async {
     var user = (await firebaseAuth.currentUser()).uid;
-
-    var snapshot = await firestore
-        .collection('users')
+    var currentItem = (await firestore.
+    collection('users')
         .document(user)
         .collection('cart')
-        .getDocuments();
-
-    for(var snapshot in snapshot.documents){
-      if(snapshot.data['item'] == item)
-      {
-        await firestore
-            .collection('users')
-            .document(user)
-            .collection('cart')
-            .document(snapshot.documentID)
-            .delete();
-        break;
-      }
+        .where('databaseRef',isEqualTo: item.databaseRef)
+        .where('size',isEqualTo: item.size)
+        .where('color',isEqualTo: item.color)
+        .getDocuments());
+    for(var snapshot in currentItem.documents){
+        if(snapshot.data['amount'] > 1) {
+          int currentAmount = snapshot.data['amount'];
+          currentAmount--;
+          await snapshot.reference.updateData({
+            'amount': currentAmount,
+          });
+        }else{
+          await snapshot.reference.delete();
+        }
     }
-
+    return get();
   }
 
 }

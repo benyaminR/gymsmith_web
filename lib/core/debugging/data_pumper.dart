@@ -19,7 +19,7 @@ Future<void> pumpData() async{
   for(var i = 0; i < 10 ; i++) {
     await sl<Firestore>().collection(Products_Path).document().setData({
       'description': 'Das beste T-Shirt überhaupt!',
-      'name': 'T-Shirt',
+      'name': 'T-Shirt'+i.toString(),
       'images': [images[Random().nextInt(images.length)]],
       'price': '29.99',
       'isAvailable': true,

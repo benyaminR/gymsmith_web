@@ -1,6 +1,3 @@
-
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,7 +52,6 @@ class CartPage extends StatelessWidget{
         ),
 
         SizedBox(height: 110,),
-
       ],
     );
   }
@@ -90,7 +86,6 @@ class CartItemCardUI extends StatelessWidget{
   final CartItemData cartItemData;
 
   const CartItemCardUI({Key key, @required this.cartItemData}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -167,7 +162,7 @@ class CartItemCardUI extends StatelessWidget{
                                                   ),
                                                   child: GestureDetector(
                                                     child: Icon(Icons.remove,size: 16),
-                                                    onTap: ()=> print('decrease'),
+                                                    onTap: ()=> sl<CartBloc>().add(RemoveItemFromCartEvent(item: cartItemData)),
                                                   ),
                                                 ),
                                                 Container(
