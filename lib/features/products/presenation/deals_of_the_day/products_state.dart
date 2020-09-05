@@ -12,22 +12,18 @@ class InitialDealsOfTheDayState extends ProductsState {
 }
 
 class Loading extends ProductsState{
-  const Loading();
   @override
   List<Object> get props => [];
 }
 class LoadedDealsOfTheDay extends ProductsState{
   final Products products;
-
   const LoadedDealsOfTheDay({@required this.products});
-
   @override
   List<Object> get props => [products];
 
 }
 class LoadedProduct extends ProductsState{
   final Product product;
-
   const LoadedProduct({@required this.product});
 
   @override
@@ -36,7 +32,6 @@ class LoadedProduct extends ProductsState{
 
 class Error extends ProductsState{
   final String msg;
-
   const Error({@required this.msg});
   @override
   List<Object> get props => [msg];

@@ -27,6 +27,7 @@ class ProductModel extends Product{
   );
 
   factory ProductModel.fromSnapshot(DocumentSnapshot snapshot){
+    print('creating Product Model named ${snapshot.data['name']} located at ${snapshot.reference.path}');
     return ProductModel(
         description:snapshot.data['description'],
         name       :snapshot.data['name'],

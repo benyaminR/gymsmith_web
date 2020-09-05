@@ -26,6 +26,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
   @override
   Stream<CartState> mapEventToState(CartEvent event) async* {
+    print('CartBloc : $event');
     if(event is GetCartEvent){
       var item = await getCartUseCase(NoParams());
       yield* item.fold(

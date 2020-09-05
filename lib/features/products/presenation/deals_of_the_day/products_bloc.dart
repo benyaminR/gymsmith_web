@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:gymsmith_web/core/error/failure.dart';
@@ -29,7 +30,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
 
   @override
   Stream<ProductsState> mapEventToState(ProductsEvent event) async* {
-    print(event);
+    print("ProductBloc : $event");
     if(event is GetDealsOfTheDayEvent){
       yield Loading();
       final failureOrItems = await getDealsOfTheDayUsecase(NoParams());

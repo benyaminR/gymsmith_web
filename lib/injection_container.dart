@@ -38,7 +38,9 @@ Future<void> init() async {
   //Features
 
   //deals of the day
-  sl.registerFactory(() => ProductsBloc(InitialDealsOfTheDayState(),getDealsOfTheDayUsecase: sl(),getProductUseCase: sl()));
+  sl.registerFactory(() {
+    return ProductsBloc(InitialDealsOfTheDayState(),getDealsOfTheDayUsecase: sl(),getProductUseCase: sl());
+  });
   //domain
   sl.registerLazySingleton(() => GetDealsOfTheDayUsecase(repository: sl()));
   sl.registerLazySingleton(() => GetProductUseCase(repo: sl()));

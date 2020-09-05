@@ -9,29 +9,22 @@ class InitialCartState extends CartState {
 }
 
 class CartFailureState extends CartState {
+
   @override
   List<Object> get props => [];
 }
 
 class CartGetState extends CartState {
-
-  CartGetState();
   @override
   List<Object> get props => [];
 }
 
 class CartRemoveState extends CartState {
-
-  CartRemoveState();
-
   @override
   List<Object> get props => [];
 }
 
 class CartAddState extends CartState {
-
-  CartAddState();
-
   @override
   List<Object> get props => [];
 }
@@ -39,9 +32,8 @@ class CartAddState extends CartState {
 class CartUpdatedState extends CartState{
 
   final Cart updatedCart;
-
   CartUpdatedState({@required this.updatedCart});
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [updatedCart];
 }

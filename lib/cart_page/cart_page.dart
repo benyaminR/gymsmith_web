@@ -65,22 +65,30 @@ class CartList extends StatelessWidget{
       create: (context) => sl<CartBloc>()..add(GetCartEvent()),
       child: BlocBuilder<CartBloc,CartState>(
         builder: (context, state) {
-          if(state is CartGetState)
+          if(state is CartGetState || state is CartRemoveState || state is CartAddState)
             return CircularProgressIndicator();
-          if(state is CartUpdatedState)
+          if(state is CartUpdatedState) {
+            print('creating product uis');
             return Column(
-              children: [
-                for(var cartItemData in state.updatedCart.items)
-                  CartItemCardUI(cartItemData: cartItemData,)
-              ],
+              children: getCartItemCartUIs(state.updatedCart.items),
             );
+          }
           return Container();
         },
       ),
     );
   }
 
+  List<Widget> getCartItemCartUIs( List<CartItemData> items){
+    List<Widget> cards = List<Widget>();
+    for(var x = 0 ; x < items.length; x++){
+      cards.add(CartItemCardUI(cartItemData: items[x]));
+    }
+    return cards;
+  }
 }
+
+
 
 class CartItemCardUI extends StatelessWidget{
   final CartItemData cartItemData;
@@ -89,12 +97,15 @@ class CartItemCardUI extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ProductsBloc>(
-      create: (context) => sl<ProductsBloc>()..add(GetProductEvent(documentRef: cartItemData.databaseRef)),
-      child: BlocBuilder<ProductsBloc,ProductsState>(
+    return BlocConsumer<ProductsBloc,ProductsState>(
+      cubit: sl<ProductsBloc>()..add(GetProductEvent(documentRef: cartItemData.databaseRef)),
+      listener: (context, state) => {
+
+      },
         builder: (context, state) {
-          if(state is Loading)
+          if(state is Loading) {
             return CircularProgressIndicator();
+          }
           if(state is LoadedProduct)
             {
               var product = state.product;
@@ -210,7 +221,6 @@ class CartItemCardUI extends StatelessWidget{
             }
           return Container();
         },
-      ),
     );
   }
 

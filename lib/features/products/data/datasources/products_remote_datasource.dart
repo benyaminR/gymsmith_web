@@ -19,5 +19,8 @@ class ProductsRemoteDataSourceImpl implements ProductsRemoteDataSource{
 
 
   @override
-  Future<ProductModel> getProduct(String documentRef) async => ProductModel.fromSnapshot( await firestore.document(documentRef).get() );
+  Future<ProductModel> getProduct(String documentRef) async {
+    print('getting document located at $documentRef and converting it to a ProductModel');
+    return ProductModel.fromSnapshot( await firestore.document(documentRef).get() );
+  }
 }
