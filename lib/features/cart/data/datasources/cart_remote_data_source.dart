@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gymsmith_web/features/cart/data/model/cart_model.dart';
 import 'package:gymsmith_web/features/cart/domain/entity/Cart.dart';
-import 'package:mockito/mockito.dart';
 
 abstract class CartRemoteDataSource{
   Future<CartModel> get();
@@ -29,6 +28,7 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource{
         .where('databaseRef',isEqualTo: item.databaseRef)
         .where('size',isEqualTo: item.size)
         .where('color',isEqualTo: item.color)
+        .where('price',isEqualTo: item.price)
         .getDocuments());
     var exists = currentItem.documents.length >= 1;
 
@@ -41,7 +41,8 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource{
         'databaseRef': item.databaseRef,
         'size': item.size,
         'amount': item.amount,
-        'color': item.color
+        'color': item.color,
+        'price' : item.price
       });
     }else{
       int currentAmount = currentItem.documents[0].data['amount'];
@@ -74,6 +75,7 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource{
         .where('databaseRef',isEqualTo: item.databaseRef)
         .where('size',isEqualTo: item.size)
         .where('color',isEqualTo: item.color)
+        .where('price',isEqualTo: item.price)
         .getDocuments());
     for(var snapshot in currentItem.documents){
         if(snapshot.data['amount'] > 1) {

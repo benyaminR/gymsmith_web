@@ -19,18 +19,19 @@ class CartItemData extends Equatable{
   final String size;
   final String color;
   final int amount;
-
-  CartItemData({@required this.databaseRef,@required this.size,@required this.color,@required this.amount});
+  final String price;
+  CartItemData({@required this.databaseRef,@required this.size,@required this.color,@required this.amount,@required this.price});
 
   @override
   List<Object> get props => [databaseRef,size,color,amount];
 
   factory CartItemData.fromSnapshot(DocumentSnapshot snapshot){
     return CartItemData(
-      databaseRef : snapshot['databaseRef'] ,
-      size : snapshot['size'],
-      color :  snapshot['color'],
-      amount : snapshot['amount']
+        databaseRef : snapshot['databaseRef'] ,
+        size : snapshot['size'],
+        color :  snapshot['color'],
+        amount : snapshot['amount'],
+        price: snapshot['price']
     );
   }
 
@@ -39,7 +40,8 @@ class CartItemData extends Equatable{
       color: item.colors[0],
       amount: 1,
       databaseRef: item.databaseRef,
-      size: item.sizes[0]
+      size: item.sizes[0],
+      price: item.price
     );
   }
 }

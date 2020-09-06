@@ -9,8 +9,11 @@ import 'package:gymsmith_web/features/cart/presentation/bloc/cart/cart_bloc.dart
 import 'package:gymsmith_web/features/products/presenation/deals_of_the_day/products_bloc.dart';
 import 'package:gymsmith_web/injection_container.dart';
 
+import 'bottom_amount_and_price_widget.dart';
+
 
 class CartPage extends StatelessWidget{
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -33,9 +36,7 @@ class CartPage extends StatelessWidget{
         Container(
           width: 625,
           child: Align(
-              child: Text('Summe (8 Artikel) : 299.99€',
-                style: roboto28Grey,
-              ),
+              child: BottomAmountAndPriceWidget(),
             alignment: Alignment.centerRight,
           ),
         ),
@@ -59,7 +60,11 @@ class CartPage extends StatelessWidget{
 }
 
 
+
 class CartList extends StatelessWidget{
+
+  const CartList({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
@@ -69,6 +74,7 @@ class CartList extends StatelessWidget{
           if(state is CartGetState || state is CartRemoveState || state is CartAddState)
             return CircularProgressIndicator();
           if(state is CartUpdatedState) {
+            //reset price and amount
             return Column(
               children: getCartItemCartUIs(state.updatedCart.items),
             );
@@ -80,6 +86,8 @@ class CartList extends StatelessWidget{
   }
 
   List<Widget> getCartItemCartUIs( List<CartItemData> items){
+
+
     List<Widget> cards = List<Widget>();
     for(var x = 0 ; x < items.length; x++){
       cards.add(CartItemCardUI(cartItemData: items[x]));

@@ -38,7 +38,8 @@ void main() {
       databaseRef: documentRef,
       size: 'M',
       amount: 1,
-      color: 'Red'
+      color: 'Red',
+      price: '20.0'
     );
 
     group('add',(){
