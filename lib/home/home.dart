@@ -46,8 +46,9 @@ class Home extends StatelessWidget {
         child: BlocBuilder<NavigationBloc,NavigationState>(
           builder: (context, state) {
             if(state is LoadedNavigationState) {
+              print('navigating from ${state.previous.toString()} to ${state.widget.toString()}');
               final currentWidget = state.widget;
-              final previousWidget = state.previous;
+              //final previousWidget = state.previous;
               return CustomAnimation<double>(
                 control: CustomAnimationControl.PLAY_FROM_START,
                 tween: 0.0.tweenTo(1.0),

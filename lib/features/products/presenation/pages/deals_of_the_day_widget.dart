@@ -13,8 +13,8 @@ class DealsOfTheDayWidget extends StatelessWidget {
     return Column(
       children: [
         TitleBar(title:sl<Translator>().translate(TranslationCodes.DEALS_OF_THE_DAY)),
-        BlocProvider(
-            create: (context) => sl<ProductsBloc>()..add(GetDealsOfTheDayEvent()),
+        BlocProvider.value(
+            value: sl<ProductsBloc>()..add(GetDealsOfTheDayEvent()),
             child: BlocBuilder<ProductsBloc,ProductsState>(
               builder: (context, state) => _getWidgetForState(state,context),
             )

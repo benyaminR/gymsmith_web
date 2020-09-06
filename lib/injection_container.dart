@@ -29,8 +29,6 @@ import 'features/products/domain/usecases/get_deals_of_the_day_usecase.dart';
 import 'features/products/presenation/deals_of_the_day/products_bloc.dart';
 
 
-
-
 final sl = GetIt.instance;
 
 Future<void> init() async {
@@ -68,7 +66,7 @@ Future<void> init() async {
   sl.registerLazySingleton<CartRemoteDataSource>(() => CartRemoteDataSourceImpl(firebaseAuth: sl(),firestore: sl()));
 
   //Auth
-  sl.registerLazySingleton(() => AuthBloc(InitialAuthState(),signInAnonymouslyUseCase: sl()));
+  sl.registerFactory(() => AuthBloc(InitialAuthState(),signInAnonymouslyUseCase: sl()));
 
   sl.registerLazySingleton(() => SignInAnonymouslyUseCase(repo: sl()));
 

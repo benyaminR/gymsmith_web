@@ -29,6 +29,7 @@ class CartPage extends StatelessWidget{
         CommonDivider(),
 
         SizedBox(height: 96,),
+
         Container(
           width: 625,
           child: Align(
@@ -61,14 +62,13 @@ class CartPage extends StatelessWidget{
 class CartList extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<CartBloc>(
-      create: (context) => sl<CartBloc>()..add(GetCartEvent()),
+    return BlocProvider.value(
+      value: sl<CartBloc>()..add(GetCartEvent()),
       child: BlocBuilder<CartBloc,CartState>(
         builder: (context, state) {
           if(state is CartGetState || state is CartRemoveState || state is CartAddState)
             return CircularProgressIndicator();
           if(state is CartUpdatedState) {
-            print('creating product uis');
             return Column(
               children: getCartItemCartUIs(state.updatedCart.items),
             );
@@ -97,19 +97,17 @@ class CartItemCardUI extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ProductsBloc,ProductsState>(
-      cubit: sl<ProductsBloc>()..add(GetProductEvent(documentRef: cartItemData.databaseRef)),
-      listener: (context, state) => {
-
-      },
-        builder: (context, state) {
+    return BlocProvider.value(
+      value: sl<ProductsBloc>()..add(GetProductEvent(documentRef: cartItemData.databaseRef)),
+      child: BlocBuilder<ProductsBloc,ProductsState>(
+        builder: (context, state){
           if(state is Loading) {
             return CircularProgressIndicator();
           }
           if(state is LoadedProduct)
-            {
-              var product = state.product;
-              return Padding(
+          {
+            var product = state.product;
+            return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   height: 280,
@@ -218,9 +216,10 @@ class CartItemCardUI extends StatelessWidget{
                   ),
                 )
             );
-            }
+          }
           return Container();
         },
+      ),
     );
   }
 

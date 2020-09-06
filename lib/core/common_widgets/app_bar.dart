@@ -40,15 +40,14 @@ class CommonAppBar extends StatelessWidget {
                     onPressed: ()=> print('user'),
                   ),
                   IconButton(
-                    icon: BlocProvider<CartBloc>(
-                      create: (context) => sl<CartBloc>()..add(GetCartEvent()),
+                    icon: BlocProvider.value(
+                      value : sl<CartBloc>()..add(GetCartEvent()),
                       child: BlocBuilder<CartBloc,CartState>(
                         builder: (context, state) {
-                          print('current State of CartBloc is $state');
                           if(state is CartUpdatedState)
                             return _updateCartIcon(state.updatedCart);
                           return CircularProgressIndicator();
-                        } ,
+                        },
                       ),
                     ),
                     onPressed: () =>  sl<NavigationBloc>().add(ChangePageEvent(widget: CartPage())),
@@ -102,6 +101,7 @@ class CommonAppBar extends StatelessWidget {
     }
     return Container();
   }
+
 
   Widget _updateCartIcon(Cart cart){
     return Stack(
