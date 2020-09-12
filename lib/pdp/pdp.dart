@@ -23,8 +23,6 @@ class PDP extends StatelessWidget{
           ],
         ),
         SizedBox(height: 525,),
-/*        TitleBar(title: 'Ähnliche Produkte',),
-        SizedBox(height: 80,),*/
         DealsOfTheDayWidget(),
         SizedBox(height: 125,),
 
