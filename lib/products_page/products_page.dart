@@ -72,7 +72,7 @@ class ProductsPage extends StatelessWidget{
               childAspectRatio: 325.0 / 375.0
             ),
             itemCount: items.items.length,
-            itemBuilder: (context, index) => ProductCardUi(item: items.items[index],),
+            itemBuilder: (context, index) => ProductCardUi(product: items.items[index],),
           ),
         ),
 

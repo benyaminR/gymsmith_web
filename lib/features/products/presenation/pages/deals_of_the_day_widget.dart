@@ -38,7 +38,7 @@ class DealsOfTheDayWidget extends StatelessWidget {
             itemCount: state.products.items.length,
             itemBuilder:(context, index) {
               final item = state.products.items[index];
-              return ProductCardUi(item: item,);
+              return ProductCardUi(product: item,);
             },
         ),
       );

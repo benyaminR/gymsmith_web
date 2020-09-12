@@ -107,7 +107,7 @@ class CommonAppBar extends StatelessWidget {
     return Stack(
       alignment: Alignment.center,
       children: [
-        Icon(CustomIcons.cart,color: Colors.white,size: 40,),
+        Icon(CustomIcons.cart,color: Colors.white,size: 28,),
         Align(
           alignment: Alignment.lerp(Alignment.topLeft, Alignment.bottomRight, 1.5),
           child: Container(

@@ -23,14 +23,18 @@ class Home extends StatelessWidget {
                 child: CommonAppBar(),
                 preferredSize: Size(MediaQuery.of(context).size.width, 70)),
             drawer : !sizingInformation.isDesktop ? CommonDrawer() : null,
-            body : SingleChildScrollView(
-              child: Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    _getCurrentPage(),
-                    BottomNavBar()
-                  ],
+            body : Scrollbar(
+              isAlwaysShown: true,
+              controller: ScrollController(),
+              child: SingleChildScrollView(
+                child: Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      _getCurrentPage(),
+                      BottomNavBar()
+                    ],
+                  ),
                 ),
               ),
             )
