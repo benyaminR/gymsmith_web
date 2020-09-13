@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 class Product extends Equatable{
   final String description;
   final String name;
-  final List<dynamic> images;
+  final Map<String,dynamic> images;
   final String price;
   final bool isNew;
   final bool isAvailable;

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gymsmith_web/core/utils/Colors/color_swatches.dart';
 import 'package:gymsmith_web/core/utils/TextStyles/text_styles.dart';
-import 'package:gymsmith_web/features/cart/domain/entity/Cart.dart';
 import 'package:gymsmith_web/features/cart/presentation/bloc/cart/cart_bloc.dart';
 import 'package:gymsmith_web/features/products/domain/entities/product.dart';
 import 'package:gymsmith_web/pdp/pdp_card_bottom_widget.dart';
@@ -48,7 +47,7 @@ Widget build(BuildContext context) {
           //Add Button
           MaterialButton(
             child: Text('Hinzufügen',style: roboto16White,),
-            onPressed: ()=> sl<CartBloc>().add(AddItemToCartEvent(item: CartItemData.fromItem(product))),
+            onPressed: ()=> sl<CartBloc>().add(AddItemToCartEvent()),
             minWidth: 471,
             height: 48,
             shape: RoundedRectangleBorder(

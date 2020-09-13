@@ -1,13 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_firestore_mocks/cloud_firestore_mocks.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gymsmith_web/core/utils/database_paths.dart';
 import 'package:gymsmith_web/features/products/data/datasources/products_remote_datasource.dart';
 import 'package:gymsmith_web/features/products/data/models/product_model.dart';
 import 'package:gymsmith_web/features/products/data/models/products_model.dart';
-import 'package:mockito/mockito.dart';
 
-import '../models/products_model_test.dart';
 
 
 void main(){
@@ -23,11 +20,10 @@ void main(){
       'isAvailable':false,
       'description':'Das beste T-Shirt, das man heutzutage finden kann!',
       'colors':[],
-      'images':[],
+      'images':Map<String,dynamic>(),
       'sizes':['S','M','L','XL']
     });
   });
-
 
 
   test('should return ItemsModel', () async{
@@ -52,7 +48,7 @@ void main(){
       'isAvailable':false,
       'description':'Das beste T-Shirt, das man heutzutage finden kann!',
       'colors':[],
-      'images':[],
+      'images':Map<String,dynamic>(),
       'sizes':['S','M','L','XL']
     });
     final productModel = ProductModel.fromSnapshot(await firestore.document(documentRef).get());

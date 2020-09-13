@@ -19,7 +19,7 @@ void main(){
       'isAvailable':false,
       'description':'Das beste T-Shirt, das man heutzutage finden kann!',
       'colors':[],
-      'images':[],
+      'images':Map<String,dynamic>(),
       'sizes':['S','M','L','XL']
     });
   });

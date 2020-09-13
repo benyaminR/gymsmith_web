@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:gymsmith_web/core/custom_icons/custom_icons_icons.dart';
 import 'package:gymsmith_web/core/navigation/navigation_bloc.dart';
@@ -16,6 +18,10 @@ class ProductCardUi extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    List<dynamic> lowResImages = product.images[product.colors[Random().nextInt(product.colors.length)]]['low_res'];
+    print(lowResImages[0]);
+
     return GestureDetector(
       onTap: () => sl<NavigationBloc>().add(ChangePageEvent(widget: PDP(product: product,))),
       child: Container(
@@ -84,7 +90,7 @@ class ProductCardUi extends StatelessWidget {
                 height: 375,
                 width: 325,
                 child: Image.network(
-                  product.images[0],
+                  lowResImages[0],
                   fit: BoxFit.cover,
                 ),
               ),

@@ -115,6 +115,7 @@ class CartItemCardUI extends StatelessWidget{
           if(state is LoadedProduct)
           {
             var product = state.product;
+            var image = product.images[cartItemData.color]['low_res'][0];
             return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
@@ -140,7 +141,7 @@ class CartItemCardUI extends StatelessWidget{
                         children: [
                           Align(
                             alignment: Alignment.centerLeft,
-                            child: Image.network(product.images[0],
+                            child: Image.network(image,
                               height: 280,
                               width: 280,
                             ),
