@@ -1,23 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gymsmith_web/core/utils/Colors/color_swatches.dart';
+import 'package:gymsmith_web/injection_container.dart';
+import 'package:gymsmith_web/pdp/PdpData.dart';
+import 'package:gymsmith_web/pdp/pdp/pdp_bloc.dart';
 
-class SelectColorWidget extends StatefulWidget{
+class SelectColorWidget extends StatelessWidget {
+  final PdpData pdpData;
 
-  @override
-  _SelectColorWidgetState createState() => _SelectColorWidgetState();
-}
-
-class _SelectColorWidgetState extends State<SelectColorWidget> {
-  var colors = [Colors.red,Colors.black,Colors.grey,Colors.white];
-
-  var selected = 0;
+  const SelectColorWidget({Key key,@required this.pdpData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return _createColorSelectBoxes();
   }
-
   _createColorSelectBox(color,listener) => Padding(
     padding: const EdgeInsets.all(4.0),
     child: GestureDetector(
@@ -30,17 +26,52 @@ class _SelectColorWidgetState extends State<SelectColorWidget> {
             color: color,
             border: Border.all(color: Black,width: 1)
         ),
-        child: color == colors[selected] ? Icon(Icons.cancel,size: 10,) : Container(),
+        child: color == convertColorStringToColor(pdpData.color) ? Icon(Icons.cancel,size: 10,) : Container(),
       ),
     ),
   );
 
   _createColorSelectBoxes(){
+    var colors = convertColorStringsToColors(pdpData.colors.keys.toList());
     return Row(
       children: [
         for(var x = 0; x < colors.length; x++)
-          _createColorSelectBox(colors[x], ()=>{setState(()=> selected = x)})
+          _createColorSelectBox(colors[x],()=>sl<PdpBloc>().add(ChangeColorEvent(color: convertColorToColorString(colors[x]))))
       ],
     );
+  }
+
+  List<Color> convertColorStringsToColors(List<String> colorStrings){
+    return colorStrings.map((e) => convertColorStringToColor(e)).toList();
+  }
+
+  Color convertColorStringToColor(String color){
+    if(color == 'red')
+      return Colors.red;
+    if(color == 'blue')
+      return Colors.blue;
+    if(color == 'white')
+      return Colors.white;
+    if(color == 'black')
+      return Colors.black;
+    if(color == 'grey')
+      return Colors.grey;
+    print('Color Not Found!');
+    return Colors.yellow;
+  }
+
+  String convertColorToColorString(Color color){
+    if(color == Colors.red)
+      return 'red';
+    if(color == Colors.blue)
+      return 'blue';
+    if(color == Colors.white)
+      return 'white';
+    if(color == Colors.black)
+      return 'black';
+    if(color == Colors.grey)
+      return 'grey';
+    print('Color Not Found!');
+    return 'black';
   }
 }

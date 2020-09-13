@@ -6,17 +6,37 @@ import 'package:gymsmith_web/core/custom_icons/custom_icons_icons.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:supercharged/supercharged.dart';
 
-class ProductImage extends StatefulWidget{
+class ProductImage extends StatelessWidget{
   final List<String> images;
   final Duration delay;
   final Duration duration;
   ProductImage({Key key,@required this.images,@required this.delay,@required this.duration}) : super(key: key);
 
   @override
-  _ProductImageState createState() {
-    return _ProductImageState(slides:List<Widget>.generate(images.length, (index) => Image.network(images[index],fit:BoxFit.cover,)));
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: EdgeInsets.only(left: 172),
+        child: Container(
+            width: 924,
+            height: 1022,
+            child: Image.network(
+                images[0],
+                fit:BoxFit.cover,
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null)
+                    return child;
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+            )
+        )
+    );
   }
+
+
 }
+/*
 
 class _ProductImageState extends State<ProductImage> {
   var index = 0;
@@ -29,6 +49,7 @@ class _ProductImageState extends State<ProductImage> {
 
   @override
   void initState() {
+    print(widget.images);
     current = slides[0];
     previous = slides[slides.length-1];
     super.initState();
@@ -106,4 +127,4 @@ class _ProductImageState extends State<ProductImage> {
     timer.cancel();
     super.dispose();
   }
-}
+}*/

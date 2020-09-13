@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gymsmith_web/features/products/domain/entities/product.dart';
+import 'package:gymsmith_web/pdp/PdpData.dart';
 
 class Cart extends Equatable{
 
@@ -42,6 +43,16 @@ class CartItemData extends Equatable{
       databaseRef: item.databaseRef,
       size: item.colors[item.previewColor][0],
       price: item.price
+    );
+  }
+
+  factory CartItemData.fromPdpData(PdpData pdpData){
+    return CartItemData(
+        databaseRef: pdpData.databaseRef,
+        size: pdpData.size,
+        color: pdpData.color,
+        amount: 1,
+        price: pdpData.price
     );
   }
 }

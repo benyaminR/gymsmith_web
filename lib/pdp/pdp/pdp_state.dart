@@ -3,19 +3,17 @@ part of 'pdp_bloc.dart';
 @immutable
 abstract class PdpState extends Equatable{}
 
-class InitialPdpState extends PdpState {
-  final Product product;
+class EmptyPdpState extends PdpState {
 
-  InitialPdpState({@required this.product});
+  EmptyPdpState();
 
   @override
-  List<Object> get props => [product];
+  List<Object> get props => [];
 }
 
-
 class UpdatedPdpState extends PdpState{
-  final CartItemData cartItemData;
-  UpdatedPdpState({@required this.cartItemData});
+  final PdpData pdpData;
+  UpdatedPdpState({@required this.pdpData});
   @override
   List<Object> get props => [];
 }

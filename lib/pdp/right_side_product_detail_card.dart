@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:gymsmith_web/core/utils/Colors/color_swatches.dart';
 import 'package:gymsmith_web/core/utils/TextStyles/text_styles.dart';
+import 'package:gymsmith_web/features/cart/domain/entity/Cart.dart';
 import 'package:gymsmith_web/features/cart/presentation/bloc/cart/cart_bloc.dart';
-import 'package:gymsmith_web/features/products/domain/entities/product.dart';
 import 'package:gymsmith_web/pdp/pdp_card_bottom_widget.dart';
 import 'package:gymsmith_web/pdp/select_color_widget.dart';
 import 'package:gymsmith_web/pdp/select_size_widget.dart';
 
 import '../injection_container.dart';
+import 'PdpData.dart';
 
 class RightSideProductDetailCard extends StatelessWidget {
-  final Product product;
-  const RightSideProductDetailCard({Key key,@required this.product}) : super(key: key);
+  final PdpData pdpData;
+  const RightSideProductDetailCard({Key key,@required this.pdpData}) : super(key: key);
 
 @override
 Widget build(BuildContext context) {
@@ -37,17 +38,17 @@ Widget build(BuildContext context) {
         children: [
           SizedBox(height: 36,),
 
-          Text(product.description,style: roboto28BlackBold,),
+          Text(pdpData.description,style: roboto28BlackBold,),
 
           SizedBox(height: 36,),
 
-          Text(product.price+'€',style: roboto28Grey),
+          Text(pdpData.price+'€',style: roboto28Grey),
 
           SizedBox(height: 90,),
           //Add Button
           MaterialButton(
             child: Text('Hinzufügen',style: roboto16White,),
-            onPressed: ()=> sl<CartBloc>().add(AddItemToCartEvent()),
+            onPressed: ()=> sl<CartBloc>().add(AddItemToCartEvent(item: CartItemData.fromPdpData(pdpData))),
             minWidth: 471,
             height: 48,
             shape: RoundedRectangleBorder(
@@ -70,7 +71,7 @@ Widget build(BuildContext context) {
 
           SizedBox(height: 16,),
 
-          SelectColorWidget(),
+          SelectColorWidget(pdpData: pdpData,),
 
           SizedBox(height: 100,),
           //bottom stuff(Description, Retoure, Reviews)

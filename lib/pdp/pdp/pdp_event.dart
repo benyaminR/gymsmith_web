@@ -5,6 +5,16 @@ abstract class PdpEvent extends Equatable{
 
 }
 
+class InitializePdpEvent extends PdpEvent{
+  final Product product;
+
+  InitializePdpEvent({@required this.product});
+
+  @override
+  List<Object> get props => [product];
+
+}
+
 class ChangeColorEvent extends PdpEvent{
   final String color;
 

@@ -18,6 +18,7 @@ import 'package:gymsmith_web/features/cart/domain/usecases/get_cart_usecase.dart
 import 'package:gymsmith_web/features/cart/domain/usecases/remove_from_the_cart_usecase.dart';
 import 'package:gymsmith_web/features/cart/presentation/bloc/cart/cart_bloc.dart';
 import 'package:gymsmith_web/features/products/domain/usecases/get_product_usecase.dart';
+import 'package:gymsmith_web/pdp/pdp/pdp_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/networking/network_info.dart';
 import 'core/networking/network_info_impl.dart';
@@ -83,6 +84,7 @@ Future<void> init() async {
   await translator.init(Language.en);
   sl.registerLazySingleton(() => translator);
 
+  sl.registerLazySingleton(() => PdpBloc(EmptyPdpState()));
 
   //Externals
   sl.registerLazySingleton<Connectivity>(() => Connectivity());
