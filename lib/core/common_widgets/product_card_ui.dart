@@ -19,8 +19,7 @@ class ProductCardUi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    List<dynamic> lowResImages = product.images[product.colors[Random().nextInt(product.colors.length)]]['low_res'];
-    print(lowResImages[0]);
+    List<dynamic> lowResImages = product.images[product.previewColor]['low_res'];
 
     return GestureDetector(
       onTap: () => sl<NavigationBloc>().add(ChangePageEvent(widget: PDP(product: product,))),
@@ -55,7 +54,7 @@ class ProductCardUi extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(16,0,0,0),
-                          child: Text(product.colors.toString(),style: roboto16Grey),
+                          child: Text(product.colors.keys.join(', '),style: roboto16Grey),
                         )
                       ],
                     ),

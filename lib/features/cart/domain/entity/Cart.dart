@@ -37,10 +37,10 @@ class CartItemData extends Equatable{
 
   factory CartItemData.fromItem(Product item){
     return CartItemData(
-      color: item.colors[0],
+      color: item.previewColor,
       amount: 1,
       databaseRef: item.databaseRef,
-      size: item.sizes[0],
+      size: item.colors[item.previewColor][0],
       price: item.price
     );
   }

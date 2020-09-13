@@ -16,11 +16,10 @@ void main(){
       'name':'T-Shirt',
       'price':'29.99€',
       'isNew':false,
-      'isAvailable':false,
       'description':'Das beste T-Shirt, das man heutzutage finden kann!',
-      'colors':[],
-      'images':Map<String,dynamic>(),
-      'sizes':['S','M','L','XL']
+      'colors': Map<String,List<dynamic>>(),
+      'images': Map<String,dynamic>(),
+      'previewColor':'red'
     });
   });
 

@@ -1,8 +1,9 @@
 
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gymsmith_web/core/utils/database_paths.dart';
 import 'package:gymsmith_web/injection_container.dart';
-
 final size = 10;
 
 Future<void> pumpData() async{
@@ -62,10 +63,14 @@ Future<void> pumpData() async{
         },
       },
       'price': '29.99',
-      'isAvailable': true,
       'isNew': true,
-      'colors': ['black', 'grey','red','white'],
-      'sizes': ['S', 'M', 'L', 'XL']
+      'colors': {
+        'black':[],
+        'grey':['S', 'L', 'XL'],
+        'red':['S', 'M', 'L', 'XL'],
+        'white':['S', 'M', 'L', ]
+      },
+      'previewColor':['black','grey','red','white'][Random().nextInt(4)],
     });
   }
 }

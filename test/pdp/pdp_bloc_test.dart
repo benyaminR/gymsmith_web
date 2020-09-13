@@ -6,13 +6,11 @@ main() {
   final Product product = Product(
     databaseRef: 'ref',
     price: "20.0",
-    colors: ['red','grey'],
+    colors: Map<String,dynamic>(),
     description: 'product',
-    images: null,
-    isAvailable: true,
+    images: Map<String,dynamic>(),
     isNew: true,
     name: 'T-Shirt',
-    sizes: ['M','L','XL'],
   );
 
   final bloc = PdpBloc(InitialPdpState(product:product));

@@ -16,11 +16,10 @@ class ProductsModel extends Products implements Equatable{
        colors: element.data['colors'],
        description:element.data['description'] ,
        images: element.data['images'],
-       isAvailable:element.data['isAvailable'],
        isNew: element.data['isNew'],
        name: element.data['name'],
        price: element.data['price'],
-       sizes:element.data['sizes'] ,
+       previewColor: element.data['previewColor'],
        databaseRef: element.reference.path
       ));
      });

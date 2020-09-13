@@ -12,7 +12,7 @@ class PDP extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    List<dynamic> highResImages = product.images[product.colors[Random().nextInt(product.colors.length)]]['high_res'];
+    List<dynamic> highResImages = product.images[product.previewColor]['high_res'];
 
     return Column(
       children: [

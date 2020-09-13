@@ -19,9 +19,9 @@ void main(){
       'isNew':false,
       'isAvailable':false,
       'description':'Das beste T-Shirt, das man heutzutage finden kann!',
-      'colors':[],
+      'colors':Map<String,dynamic>(),
       'images':Map<String,dynamic>(),
-      'sizes':['S','M','L','XL']
+      'previewColor':'red'
     });
   });
 
@@ -42,14 +42,14 @@ void main(){
     //arrange
     final documentRef = 'collection/ref';
     await firestore.document(documentRef).setData({
-      'name':'T-Shirt',
-      'price':'29.99€',
-      'isNew':false,
-      'isAvailable':false,
+      'name': 'T-Shirt',
+      'price': '29.99',
+      'isNew': false,
+      'isAvailable': false,
       'description':'Das beste T-Shirt, das man heutzutage finden kann!',
-      'colors':[],
-      'images':Map<String,dynamic>(),
-      'sizes':['S','M','L','XL']
+      'colors': Map<String,dynamic>(),
+      'images': Map<String,dynamic>(),
+      'previewColor':'red'
     });
     final productModel = ProductModel.fromSnapshot(await firestore.document(documentRef).get());
     //act
