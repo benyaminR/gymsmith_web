@@ -33,16 +33,24 @@ class SelectColorWidget extends StatelessWidget {
 
   _createColorSelectBoxes(){
     var colors = convertColorStringsToColors(pdpData.colors.keys.toList());
+
     return Row(
       children: [
         for(var x = 0; x < colors.length; x++)
-          _createColorSelectBox(colors[x],()=>sl<PdpBloc>().add(ChangeColorEvent(color: convertColorToColorString(colors[x]))))
+          if(_isThisColorAvailable(colors[x]))
+            _createColorSelectBox(colors[x],()=>sl<PdpBloc>().add(ChangeColorEvent(color: convertColorToColorString(colors[x]))))
       ],
     );
   }
 
+
   List<Color> convertColorStringsToColors(List<String> colorStrings){
     return colorStrings.map((e) => convertColorStringToColor(e)).toList();
+  }
+
+  bool _isThisColorAvailable(Color color){
+    var colorString = convertColorToColorString(color);
+    return (pdpData.colors[colorString] as List<dynamic>).length != 0;
   }
 
   Color convertColorStringToColor(String color){

@@ -63,7 +63,7 @@ Widget build(BuildContext context) {
 
           SizedBox(height: 16,),
 
-          SelectSizeWidget(),
+          SelectSizeWidget(pdpData: pdpData,),
 
           SizedBox(height: 36,),
           //Color Selector
