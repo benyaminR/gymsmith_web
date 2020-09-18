@@ -13,20 +13,21 @@ class SelectSizeWidget extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    _selectAnAvailableSize();
     return _createSizeSelectBoxes();
   }
 
-  _createSizeSelectBox(size,listener) => Padding(
+  _createSizeSelectBox(String size,Function listener,bool isAvailable) => Padding(
     padding: const EdgeInsets.all(4.0),
     child: GestureDetector(
-      onTap: listener,
+      onTap: isAvailable ? listener : ()=> print('this size is unavailable!'),
       child: Container(
         alignment: Alignment.center,
         width: 36,
         height: 36,
-        child: size == pdpData.size ? Text(size,style: roboto16White,):Text(size,style: roboto16Black,),
+        child: isAvailable ?( size == pdpData.size ? Text(size,style: roboto16White,):Text(size,style: roboto16Black,)) : Text(size,style: roboto16White,),
         decoration: BoxDecoration(
-          color: size == pdpData.size ? Black : White,
+          color: isAvailable ? (size == pdpData.size ? Black : White) : Grey_Light,
             border: Border.all(color: Black,width: 1)
         ),
       ),
@@ -34,13 +35,18 @@ class SelectSizeWidget extends StatelessWidget{
   );
 
   _createSizeSelectBoxes(){
-    var sizes = (pdpData.colors[pdpData.color] as List<dynamic>).map((e) => e.toString()).toList();
+    var sizes = (pdpData.colors[pdpData.color] as Map<String,dynamic>);
 
     return Row(
       children: [
         for(var x = 0; x < sizes.length; x++)
-          _createSizeSelectBox(sizes[x], ()=>sl<PdpBloc>().add(ChangeSizeEvent(size: sizes[x])))
+          _createSizeSelectBox(sizes.keys.toList()[x], ()=>sl<PdpBloc>().add(ChangeSizeEvent(size: sizes.keys.toList()[x])),sizes[sizes.keys.toList()[x]])
       ],
     );
+  }
+
+  _selectAnAvailableSize(){
+    if(!pdpData.isSizeAvailable())
+      sl<PdpBloc>().add(ChangeSizeEvent(size: pdpData.getARandomAvailableSize()));
   }
 }

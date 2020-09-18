@@ -14,10 +14,10 @@ class SelectColorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return _createColorSelectBoxes();
   }
-  _createColorSelectBox(color,listener) => Padding(
+  _createColorSelectBox(Color color,Function listener) => Padding(
     padding: const EdgeInsets.all(4.0),
     child: GestureDetector(
-      onTap: listener,
+      onTap:listener,
       child: Container(
         alignment: Alignment.center,
         width: 36,
@@ -26,7 +26,7 @@ class SelectColorWidget extends StatelessWidget {
             color: color,
             border: Border.all(color: Black,width: 1)
         ),
-        child: color == convertColorStringToColor(pdpData.color) ? Icon(Icons.cancel,size: 10,) : Container(),
+        child: color == convertColorStringToColor(pdpData.color) ? Icon(Icons.check,size: 36,color: Colors.black54,) : Container(),
       ),
     ),
   );
@@ -37,8 +37,10 @@ class SelectColorWidget extends StatelessWidget {
     return Row(
       children: [
         for(var x = 0; x < colors.length; x++)
-          if(_isThisColorAvailable(colors[x]))
-            _createColorSelectBox(colors[x],()=>sl<PdpBloc>().add(ChangeColorEvent(color: convertColorToColorString(colors[x]))))
+            _createColorSelectBox(
+                colors[x],
+                ()=> sl<PdpBloc>().add(ChangeColorEvent(color: convertColorToColorString(colors[x]))),
+            )
       ],
     );
   }
@@ -48,10 +50,10 @@ class SelectColorWidget extends StatelessWidget {
     return colorStrings.map((e) => convertColorStringToColor(e)).toList();
   }
 
-  bool _isThisColorAvailable(Color color){
+/*  bool _isThisColorAvailable(Color color){
     var colorString = convertColorToColorString(color);
-    return (pdpData.colors[colorString] as List<dynamic>).length != 0;
-  }
+    return (pdpData.colors[colorString] as Map<String,dynamic>).length != 0;
+  }*/
 
   Color convertColorStringToColor(String color){
     if(color == 'red')

@@ -47,14 +47,16 @@ Widget build(BuildContext context) {
           SizedBox(height: 90,),
           //Add Button
           MaterialButton(
-            child: Text('Hinzufügen',style: roboto16White,),
-            onPressed: ()=> sl<CartBloc>().add(AddItemToCartEvent(item: CartItemData.fromPdpData(pdpData))),
+            child: Text(pdpData.isSizeAvailable() ? 'Hinzufügen' : 'Ausverkauft!',style: roboto16White,),
+            onPressed: ()=> pdpData.isSizeAvailable() ?
+            sl<CartBloc>().add(AddItemToCartEvent(item: CartItemData.fromPdpData(pdpData))) :
+            Scaffold.of(context).showSnackBar(SnackBar(content: Text('Dieses Produkt ist leider ausverkauft!'))),
             minWidth: 471,
             height: 48,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(24)
             ),
-            color: Orange,
+            color: pdpData.isSizeAvailable() ? Orange : Grey_Dark,
           ),
 
           SizedBox(height: 70,),

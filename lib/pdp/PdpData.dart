@@ -26,7 +26,7 @@ class PdpData extends Equatable{
 
   factory PdpData.fromProduct(Product product){
     return PdpData(
-      size: product.colors[product.previewColor][0],
+      size: product.getARandomAvailableSize(),
       color: product.previewColor,
       price: product.price,
       colors: product.colors,
@@ -39,5 +39,19 @@ class PdpData extends Equatable{
 
   @override
   List<Object> get props => [size,color,price,colors,images,description,name,databaseRef];
+
+  bool isSizeAvailable() {
+    if(size == null) return false;
+    return colors[color][size];
+  }
+
+  String getARandomAvailableSize() {
+    var sizes = (colors[color] as Map<String,dynamic>);
+    for(var pair in sizes.entries){
+      if(pair.value)
+        return pair.key;
+    }
+    return null;
+  }
 
 }

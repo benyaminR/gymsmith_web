@@ -22,6 +22,15 @@ class Product extends Equatable{
     @required this.previewColor
   });
 
+  String getARandomAvailableSize() {
+    var sizes = (colors[previewColor] as Map<String,dynamic>);
+    for(var pair in sizes.entries){
+      if(pair.value)
+        return pair.key;
+    }
+    return null;
+  }
+
   @override
   List<Object> get props => [description,name,price,isNew,colors,databaseRef,previewColor];
 

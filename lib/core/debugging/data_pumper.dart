@@ -65,10 +65,30 @@ Future<void> pumpData() async{
       'price': '29.99',
       'isNew': true,
       'colors': {
-        'black':[],
-        'grey':['S', 'L', 'XL'],
-        'red':['S', 'M', 'L', 'XL'],
-        'white':['S', 'M', 'L', ]
+        'black':{
+          'S':true,
+          'M':true,
+          'L':true,
+          'XL':true
+        },
+        'red':{
+          'S':true,
+          'M':false,
+          'L':true,
+          'XL':true
+        },
+        'white':{
+          'S':false,
+          'M':false,
+          'L':false,
+          'XL':true
+        },
+        'grey':{
+          'S':false,
+          'M':false,
+          'L':false,
+          'XL':false
+        },
       },
       'previewColor':['black','grey','red','white'][Random().nextInt(4)],
     });
