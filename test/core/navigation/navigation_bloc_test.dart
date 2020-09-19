@@ -7,8 +7,8 @@ import 'package:mockito/mockito.dart';
 
 void main() {
   final bloc = NavigationBloc(LoadingNavigationState());
-  final container = Container();
-  final previous = Container();
+  final container = NavigationContainer();
+  final previous = NavigationContainer();
 
   group('NavigationBloc', (){
 

@@ -36,7 +36,6 @@ class SelectSizeWidget extends StatelessWidget{
 
   _createSizeSelectBoxes(){
     var sizes = (pdpData.colors[pdpData.color] as Map<String,dynamic>);
-
     return Row(
       children: [
         for(var x = 0; x < sizes.length; x++)

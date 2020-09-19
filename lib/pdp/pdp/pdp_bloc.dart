@@ -20,7 +20,7 @@ class PdpBloc extends Bloc<PdpEvent, PdpState> {
   Stream<PdpState> mapEventToState(PdpEvent event) async* {
     if(event is InitializePdpEvent){
       yield LoadingPdpState();
-      pdpData = PdpData.fromProduct(event.product);
+      pdpData = pdpData == null ? PdpData.fromProduct(event.product) : pdpData;
       yield UpdatedPdpState(pdpData: pdpData);
     }else if(event is ChangeColorEvent){
       yield LoadingPdpState();

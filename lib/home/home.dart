@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gymsmith_web/core/NonScrollBehavior.dart';
 import 'package:gymsmith_web/core/common_widgets/app_bar.dart';
@@ -13,8 +14,12 @@ import 'package:simple_animations/simple_animations.dart';
 import 'package:supercharged/supercharged.dart';
 
 class Home extends StatelessWidget {
+
+  final ScrollController _scrollController = ScrollController(initialScrollOffset: 0);
+
   @override
   Widget build(BuildContext context) {
+
     return ScrollConfiguration(
       behavior: NonScrollBehavior(),
       child: ResponsiveBuilder(
@@ -23,21 +28,7 @@ class Home extends StatelessWidget {
                 child: CommonAppBar(),
                 preferredSize: Size(MediaQuery.of(context).size.width, 70)),
             drawer : !sizingInformation.isDesktop ? CommonDrawer() : null,
-            body : Scrollbar(
-              isAlwaysShown: true,
-              controller: ScrollController(),
-              child: SingleChildScrollView(
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      _getCurrentPage(),
-                      BottomNavBar()
-                    ],
-                  ),
-                ),
-              ),
-            )
+            body : _getCurrentPage()
         ),
       ),
     );
@@ -46,12 +37,12 @@ class Home extends StatelessWidget {
   Widget _getCurrentPage(){
     return ResponsiveBuilder(
       builder:(context, sizingInformation) =>  BlocProvider<NavigationBloc>(
-        create:(context) => sl<NavigationBloc>()..add(ChangePageEvent(widget: HomePage(sizingInformation: sizingInformation,))) ,
+        create:(context) => sl<NavigationBloc>()..add(ChangePageEvent(widget: HomePage())) ,
         child: BlocBuilder<NavigationBloc,NavigationState>(
           builder: (context, state) {
             if(state is LoadedNavigationState) {
-              print('navigating from ${state.previous.toString()} to ${state.widget.toString()}');
-              final currentWidget = state.widget;
+              final currentWidget = state.widget ;
+              currentWidget.onResponsiveness(sizingInformation);
               //final previousWidget = state.previous;
               return CustomAnimation<double>(
                 control: CustomAnimationControl.PLAY_FROM_START,
@@ -61,7 +52,21 @@ class Home extends StatelessWidget {
                 builder: (context, child, value) =>
                     Opacity(
                       opacity: value,
-                      child: currentWidget,
+                      child:  Scrollbar(
+                        isAlwaysShown: true,
+                        controller: _scrollController,
+                        child: SingleChildScrollView(
+                          child: Container(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                currentWidget as Widget,
+                                BottomNavBar()
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
               );
             }

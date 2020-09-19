@@ -25,7 +25,7 @@ class CommonAppBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               GestureDetector(
-                  onTap: ()=> sl<NavigationBloc>().add(ChangePageEvent(widget: HomePage(sizingInformation: sizingInformation,))),
+                  onTap: ()=> sl<NavigationBloc>().add(ChangePageEvent(widget: HomePage())),
                   child: Text("GYMSMITH",style: roboto28BoldWhite,)
               ),
               _getCategoriesForSize(sizingInformation),
@@ -64,7 +64,7 @@ class CommonAppBar extends StatelessWidget {
   }
 
   Widget _getCategoriesForSize(SizingInformation sizingInformation){
-    print('Sizing : '+sizingInformation.toString());
+    print('Sizing : ' + sizingInformation.toString());
     if(sizingInformation.isDesktop) {
       return Row(
         children: [

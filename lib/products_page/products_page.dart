@@ -5,12 +5,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gymsmith_web/core/common_widgets/product_card_ui.dart';
 import 'package:gymsmith_web/core/common_widgets/title_bar.dart';
+import 'package:gymsmith_web/core/navigation/INavigationWidget.dart';
 import 'package:gymsmith_web/core/utils/Colors/color_swatches.dart';
 import 'package:gymsmith_web/features/products/domain/entities/products.dart';
 import 'package:gymsmith_web/features/products/presenation/deals_of_the_day/products_bloc.dart';
 import 'package:gymsmith_web/injection_container.dart';
+import 'package:responsive_builder/src/sizing_information.dart';
 
-class ProductsPage extends StatelessWidget{
+class ProductsPage extends StatelessWidget implements INavigationWidget{
 
   
   final ProductsEvent event;
@@ -19,6 +21,11 @@ class ProductsPage extends StatelessWidget{
   final String titleText;
 
   const ProductsPage({Key key,@required this.event,@required this.imageText,@required this.imagePath,@required this.titleText}) : super(key: key);
+
+  @override
+  void onResponsiveness(SizingInformation sizingInformation) {
+    // TODO: implement onResponsiveness
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,5 +88,7 @@ class ProductsPage extends StatelessWidget{
       ],
     );
   }
+
+
 
 }

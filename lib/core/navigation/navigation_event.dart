@@ -5,7 +5,7 @@ abstract class NavigationEvent extends Equatable {
 }
 
 class ChangePageEvent extends NavigationEvent{
-  final Widget widget;
+  final INavigationWidget widget;
 
   ChangePageEvent({@required this.widget});
 

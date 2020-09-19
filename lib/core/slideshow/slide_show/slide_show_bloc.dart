@@ -59,6 +59,7 @@ class SlideShowBloc extends Bloc<SlideShowEvent, SlideShowState> {
     });
   }
 
+
 }
 
 

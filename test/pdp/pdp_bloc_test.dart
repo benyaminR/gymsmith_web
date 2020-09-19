@@ -7,8 +7,8 @@ main() {
     databaseRef: 'ref',
     price: "20.0",
     colors: {
-      'red':['S','M'],
-      'white':['S','M']
+      'red':{'S':true,'M':false},
+      'white':{'S':true,'M':false}
     },
     description: 'product',
     images: Map<String,dynamic>(),

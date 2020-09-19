@@ -1,39 +1,31 @@
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gymsmith_web/core/custom_icons/custom_icons_icons.dart';
-import 'package:simple_animations/simple_animations.dart';
-import 'package:supercharged/supercharged.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class ProductImage extends StatelessWidget{
   final List<String> images;
-  final Duration delay;
-  final Duration duration;
-  ProductImage({Key key,@required this.images,@required this.delay,@required this.duration}) : super(key: key);
+  final SizingInformation sizingInformation;
+  ProductImage({Key key,@required this.images,@required this.sizingInformation}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: EdgeInsets.only(left: 172),
-        child: Container(
-            width: 924,
-            height: 1022,
-            child: Image.network(
-                images[0],
-                fit:BoxFit.cover,
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null)
-                    return child;
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-            )
+
+    return Container(
+        width: 250,
+        height: 300,
+        child: Image.network(
+            images[0],
+            fit:BoxFit.cover,
+            loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress == null)
+                return child;
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
         )
     );
   }
-
 
 }
 /*

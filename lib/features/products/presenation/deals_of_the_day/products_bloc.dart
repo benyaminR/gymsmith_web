@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:gymsmith_web/core/error/failure.dart';
@@ -23,7 +22,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
 
   final GetDealsOfTheDayUsecase getDealsOfTheDayUsecase;
   final GetProductUseCase getProductUseCase;
-
+  
   ProductsBloc(ProductsState initialState, {@required this.getDealsOfTheDayUsecase, @required this.getProductUseCase}) : super(initialState);
 
   ProductsState get initialState => InitialDealsOfTheDayState();

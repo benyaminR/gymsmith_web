@@ -3,16 +3,18 @@ import 'package:gymsmith_web/core/utils/Colors/color_swatches.dart';
 import 'package:gymsmith_web/core/utils/TextStyles/text_styles.dart';
 import 'package:gymsmith_web/features/cart/domain/entity/Cart.dart';
 import 'package:gymsmith_web/features/cart/presentation/bloc/cart/cart_bloc.dart';
-import 'package:gymsmith_web/pdp/pdp_card_bottom_widget.dart';
-import 'package:gymsmith_web/pdp/select_color_widget.dart';
-import 'package:gymsmith_web/pdp/select_size_widget.dart';
+import 'package:gymsmith_web/pdp/desktop/pdp_card_bottom_widget.dart' as Desktop;
+import 'package:gymsmith_web/pdp/desktop/select_color_widget.dart' as Desktop;
+import 'package:gymsmith_web/pdp/desktop/select_size_widget.dart' as Desktop;
+import 'package:responsive_builder/responsive_builder.dart';
 
-import '../injection_container.dart';
-import 'PdpData.dart';
+import '../../injection_container.dart';
+import '../PdpData.dart';
 
 class RightSideProductDetailCard extends StatelessWidget {
   final PdpData pdpData;
-  const RightSideProductDetailCard({Key key,@required this.pdpData}) : super(key: key);
+  final SizingInformation sizingInformation;
+  const RightSideProductDetailCard({Key key,@required this.pdpData,@required this.sizingInformation}) : super(key: key);
 
 @override
 Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ Widget build(BuildContext context) {
     child: Container(
       padding: EdgeInsets.only(left: 42,right: 42),
       height: 975,
-      width: 555,
+      width: sizingInformation.screenSize.width / 3,
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -51,7 +53,7 @@ Widget build(BuildContext context) {
             onPressed: ()=> pdpData.isSizeAvailable() ?
             sl<CartBloc>().add(AddItemToCartEvent(item: CartItemData.fromPdpData(pdpData))) :
             Scaffold.of(context).showSnackBar(SnackBar(content: Text('Dieses Produkt ist leider ausverkauft!'))),
-            minWidth: 471,
+            minWidth: sizingInformation.screenSize.width / 3 - 80,
             height: 48,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(24)
@@ -65,7 +67,7 @@ Widget build(BuildContext context) {
 
           SizedBox(height: 16,),
 
-          SelectSizeWidget(pdpData: pdpData,),
+          Desktop.SelectSizeWidget(pdpData: pdpData,),
 
           SizedBox(height: 36,),
           //Color Selector
@@ -73,11 +75,11 @@ Widget build(BuildContext context) {
 
           SizedBox(height: 16,),
 
-          SelectColorWidget(pdpData: pdpData,),
+          Desktop.SelectColorWidget(pdpData: pdpData,),
 
           SizedBox(height: 100,),
           //bottom stuff(Description, Retoure, Reviews)
-          PDPCardBottomWidget()
+          Desktop.PDPCardBottomWidget()
         ],
       ),
     ),
