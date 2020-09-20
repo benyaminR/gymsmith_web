@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gymsmith_web/core/common_widgets/product_card_ui.dart';
 import 'package:gymsmith_web/core/common_widgets/title_bar.dart';
@@ -49,16 +50,17 @@ class ProductsPageContent extends StatelessWidget{
         SizedBox(height: 42,),
 
         Padding(
-          padding: const EdgeInsets.only( left: 36 , right: 36 ),
-          child: GridView.builder(
-            shrinkWrap: true,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            padding: const EdgeInsets.only( left: 36 , right: 36 ),
+            child:Container(
+              height: ((products.items.length/4)*485.0),
+              child: StaggeredGridView.countBuilder(
                 crossAxisCount: 3,
-                childAspectRatio: 325.0 / 375.0
-            ),
-            itemCount: products.items.length,
-            itemBuilder: (context, index) => ProductCardUi(product: products.items[index],),
-          ),
+                itemCount: products.items.length,
+                itemBuilder: (context, index) => ProductCardUi(product: products.items[index],),
+                staggeredTileBuilder: (index) => StaggeredTile.fit(1),
+                crossAxisSpacing: 8,
+              ),
+            )
         ),
 
         SizedBox(height: 164,),

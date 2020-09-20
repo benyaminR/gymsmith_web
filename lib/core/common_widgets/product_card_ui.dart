@@ -20,11 +20,9 @@ class ProductCardUi extends StatelessWidget {
   Widget build(BuildContext context) {
 
     List<dynamic> lowResImages = product.images[product.previewColor]['low_res'];
-
     return GestureDetector(
       onTap: () => sl<NavigationBloc>().add(ChangePageEvent(widget: PDP(product: product,))),
       child: Container(
-        padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
         width: 325,
         height: 485,
         child: Stack(
