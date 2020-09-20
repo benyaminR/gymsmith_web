@@ -19,10 +19,8 @@ class ProductsPageContent extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    print('Tablet size!');
     return Column(
       children: [
-        Text('Tablet size!'),
         SizedBox(height: 38,),
         Stack(
           alignment: Alignment.center,

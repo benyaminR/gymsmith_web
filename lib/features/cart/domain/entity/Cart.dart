@@ -41,7 +41,7 @@ class CartItemData extends Equatable{
       color: item.previewColor,
       amount: 1,
       databaseRef: item.databaseRef,
-      size: item.colors[item.previewColor][0],
+      size: item.getAnAvailableColorForPreviewColor(),
       price: item.price
     );
   }

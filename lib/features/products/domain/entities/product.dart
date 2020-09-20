@@ -34,4 +34,20 @@ class Product extends Equatable{
   @override
   List<Object> get props => [description,name,price,isNew,colors,databaseRef,previewColor];
 
+  bool isPreviewColorAvailable() {
+    var sizes = colors[previewColor] as Map<String,dynamic>;
+    for(var size in sizes.entries)
+      if(size.value)
+        return true;
+    return false;
+  }
+
+  String getAnAvailableColorForPreviewColor() {
+    var sizes = colors[previewColor] as Map<String,dynamic>;
+    for(var size in sizes.entries)
+      if(size.value)
+        return size.key;
+    throw Exception('Impossible Error!');
+  }
+
 }

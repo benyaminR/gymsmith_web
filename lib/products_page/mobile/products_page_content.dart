@@ -19,7 +19,6 @@ class ProductsPageContent extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    print('Mobile size!');
     return Column(
       children: [
         SizedBox(height: 38,),

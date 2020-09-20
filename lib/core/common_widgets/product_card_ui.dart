@@ -69,8 +69,8 @@ class ProductCardUi extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.only(top: 16),
                             child: GestureDetector(
-                              onTap: ()=> sl<CartBloc>().add(AddItemToCartEvent(item: CartItemData.fromItem(product))),
-                              child: Icon(CustomIcons.cart,size: 28,),
+                              onTap: product.isPreviewColorAvailable() ? ()=> sl<CartBloc>().add(AddItemToCartEvent(item: CartItemData.fromItem(product))) : null,
+                              child: product.isPreviewColorAvailable() ? Icon(CustomIcons.cart,size: 28,) : Container(),
                             ),
                           ),
                         )
