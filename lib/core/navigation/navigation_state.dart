@@ -14,8 +14,8 @@ class InitialNavigationState extends NavigationState {
 }
 
 class LoadedNavigationState extends NavigationState{
-  final INavigationWidget widget;
-  final INavigationWidget previous;
+  final Widget widget;
+  final Widget previous;
 
   LoadedNavigationState({@required this.widget, @required this.previous});
   @override

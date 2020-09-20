@@ -42,7 +42,6 @@ class Home extends StatelessWidget {
           builder: (context, state) {
             if(state is LoadedNavigationState) {
               final currentWidget = state.widget ;
-              currentWidget.onResponsiveness(sizingInformation);
               //final previousWidget = state.previous;
               return CustomAnimation<double>(
                 control: CustomAnimationControl.PLAY_FROM_START,
